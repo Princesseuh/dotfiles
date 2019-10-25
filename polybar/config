@@ -69,7 +69,7 @@ cursor-scroll = ns-resize
 
 [module/xwindow]
 type = internal/xwindow
-label = %title:0:45:...%
+label = %title:0:120:...%
 
 [module/i3]
 type = internal/i3
@@ -123,6 +123,7 @@ label-focused-padding = 2
 ; unfocused = Inactive workspace on any monitor
 label-unfocused = %icon%
 label-unfocused-padding = 2
+label-unfocused-background = #171717
 
 ; visible = Active workspace on unfocused monitor
 label-visible = %icon%

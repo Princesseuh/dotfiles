@@ -25,12 +25,12 @@ configuration {
 /*	sort: false;*/
 /*	levenshtein-sort: false;*/
 /*	case-sensitive: false;*/
-    sidebar-mode: true;
+/*  sidebar-mode: false;*/
 /*	eh: 1;*/
 /*	auto-select: false;*/
 /*	parse-hosts: false;*/
 /*	parse-known-hosts: true;*/
-/*	combi-modi: "window,run";*/
+	combi-modi: "window,drun";
 /*	matching: "normal";*/
 /*	tokenize: true;*/
 /*	m: "-5";*/
@@ -55,7 +55,7 @@ theme: "~/.cache/wal/colors-rofi-dark.rasi";
 /*	color-active: ;*/
 /*	color-window: ;*/
 /*	max-history-size: 25;*/
-/*	combi-hide-mode-prefix: false;*/
+	combi-hide-mode-prefix: true;
 /*	pid: "/run/user/578291448/rofi.pid";*/
 /*	display-window: ;*/
 /*	display-windowcd: ;*/

@@ -119,6 +119,13 @@ bindsym $mod+Shift+8 move container to workspace $ws8
 bindsym $mod+Shift+9 move container to workspace $ws9
 bindsym $mod+Shift+0 move container to workspace $ws10
 
+# Bindings for MS Natural Ergonomic Keyboard 4000
+bindsym XF86Launch5 workspace $ws1
+bindsym XF86Launch6 workspace $ws2
+bindsym XF86Launch7 workspace $ws3
+bindsym XF86Launch8 workspace $ws4
+bindsym XF86Launch9 workspace $ws5
+
 workspace $ws1 output primary
 workspace $ws2 output DP-1-1
 workspace $ws3 output eDP-1-1
@@ -190,6 +197,7 @@ bindsym $mod+r mode "resize"
 for_window [window_role="pop-up"] floating enable
 for_window [window_role="task_dialog"] floating enable
 for_window [class="Pavucontrol"] floating enable
+for_window [class="Gnome-calculator"] floating enable
 for_window [title="win0"] floating enable
 
 # Move some window to specific workspaces

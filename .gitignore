@@ -1,2 +1,14 @@
+# Misc
 spotify_status.py
 .env
+
+# Fish
+fish_variables
+fishd.*
+local.fish
+
+#Fisher
+fisher.fish
+fish/fisher/functions/*.fish
+fish/fisher/completions/*.fish
+fish/fisher/conf.d/*.fish

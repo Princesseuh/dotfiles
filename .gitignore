@@ -3,9 +3,9 @@ spotify_status.py
 .env
 
 # Fish
-fish_variables
-fishd.*
-local.fish
+fish/fish_variables
+fish/fishd.*
+fish/local.fish
 
 #Fisher
 fisher.fish

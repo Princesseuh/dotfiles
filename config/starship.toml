@@ -1,0 +1,19 @@
+add_newline = false
+
+[directory]
+truncation_length = 3
+fish_style_pwd_dir_length = 3
+
+[git_branch]
+style = "bold green"
+
+[nodejs]
+disabled = true
+
+[package]
+disabled = true
+
+[character]
+error_symbol = "✗"
+use_symbol_for_status = true
+style_failure = "bold green"

@@ -12,3 +12,5 @@ for file in $fisher_path/conf.d/*.fish
 end
 
 source $HOME/.config/fish/local.fish
+
+starship init fish | source

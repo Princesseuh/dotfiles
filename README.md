@@ -2,14 +2,13 @@
 
 Currently, this is the dotfiles I use at work. In the future I'd like to also add the ones I use at home (currently not in git)
 
-
 ## Configuration:
 
 - Distribution: Ubuntu (at work), ArchLinux (at home)
-- WM: i3
-- Bar: Polybar
+- WM: [i3-gaps](https://github.com/polybar/polybar)
+- Bar: [Polybar](https://github.com/polybar/polybar)
 - Compositor: None (at work), Compton (at home)
-- Terminal Emulator: Alacritty
+- Terminal Emulator: [Alacritty](https://github.com/polybar/polybar)
 - Shell: Fish
 
 ## Requirements:

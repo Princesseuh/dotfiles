@@ -1,5 +1,3 @@
-# Required for something at work
-
 set fish_greeting ""
 set fish_color_search_match --background='333'
 
@@ -12,3 +10,5 @@ set fish_complete_path $fish_complete_path[1] $fisher_path/completions $fish_com
 for file in $fisher_path/conf.d/*.fish
     builtin source $file 2> /dev/null
 end
+
+source $HOME/.config/fish/local.fish

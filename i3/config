@@ -9,6 +9,8 @@
 #
 # Please see https://i3wm.org/docs/userguide.html for a complete reference!
 
+set $noid --no-startup-id
+
 set $mod Mod4
 
 # Font for window titles. Will also be used by the bar unless a different font
@@ -141,6 +143,8 @@ bindsym $mod+Shift+r restart
 bindsym $mod+Shift+e exec "i3-nagbar -t warning -m 'You pressed the exit shortcut. Do you really want to exit i3? This will end your X session.' -B 'Yes, exit i3' 'i3-msg exit'"
 
 bindsym $mod+l exec "i3lock -c 000000 -e"
+
+# Quickly edit dotfiles
 bindsym $mod+k exec "code ~/dotfiles"
 
 bindsym XF86AudioPlay exec playerctl play-pause
@@ -148,9 +152,9 @@ bindsym XF86AudioPause exec playerctl play-pause
 bindsym XF86AudioNext exec playerctl next
 bindsym XF86AudioPrev exec playerctl previous
 
-bindsym XF86AudioRaiseVolume exec --no-startup-id pactl set-sink-volume 0 +5% #increase sound volume
-bindsym XF86AudioLowerVolume exec --no-startup-id pactl set-sink-volume 0 -5% #decrease sound volume
-bindsym XF86AudioMute exec --no-startup-id pactl set-sink-mute 0 toggle # mute sound
+bindsym XF86AudioRaiseVolume exec $noid pactl set-sink-volume 0 +5% #increase sound volume
+bindsym XF86AudioLowerVolume exec $noid pactl set-sink-volume 0 -5% #decrease sound volume
+bindsym XF86AudioMute exec $noid pactl set-sink-mute 0 toggle # mute sound
 
 focus_follows_mouse no
 
@@ -200,9 +204,9 @@ bindsym $mod+r mode "resize"
 for_window [window_role="task_dialog"] floating enable
 for_window [class="(?i)pavucontrol"] floating enable
 for_window [class="Gnome-calculator"] floating enable
-for_window [title="win0"] floating enable
+for_window [title="win0"] floating enable # JetBrain splash screen
 
-# Fix popups dialogues not floating
+# Make all pop-up dialogues floating by default
 for_window [window_role="pop-up"] floating enable
 for_window [window_role="bubble"] floating enable
 for_window [window_role="task_dialog"] floating enable
@@ -214,6 +218,7 @@ for_window [window_type="menu"] floating enable
 # Move some window to specific workspaces
 for_window [class="Spotify"] move to workspace $ws10
 
+assign [class="jetbrains-phpstorm"] $ws1
 assign [class="Firefox"] $ws2
 assign [class="Spotify"] $ws10
 
@@ -228,11 +233,12 @@ gaps outer 0
 
 smart_gaps on
 
-exec --no-startup-id ~/.screenlayout/screenlayout.sh
-exec --no-startup-id nitrogen --restore
-exec --no-startup-id wal -R -n --vte
-exec_always --no-startup-id $HOME/.config/polybar/launch.sh
-exec --no-startup-id xkbcomp -w 0 ~/.xkbmap $DISPLAY
-exec --no-startup-id spotify
-exec --no-startup-id dunst
-exec --no-startup-id /usr/lib/policykit-1-gnome/polkit-gnome-authentication-agent-1 &
+# Auto-start those programs
+exec $noid ~/.screenlayout/screenlayout.sh
+exec $noid nitrogen --restore
+exec $noid wal -R -n --vte
+exec_always $noid $HOME/.config/polybar/launch.sh
+exec $noid xkbcomp -w 0 ~/.xkbmap $DISPLAY
+exec $noid dunst
+exec $noid /usr/lib/policykit-1-gnome/polkit-gnome-authentication-agent-1 &
+exec $noid spotify

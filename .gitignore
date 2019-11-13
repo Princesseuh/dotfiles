@@ -8,7 +8,7 @@ fish/fishd.*
 fish/local.fish
 
 #Fisher
-fisher.fish
+fish/functions/fisher.fish
 fish/fisher/functions/*.fish
 fish/fisher/completions/*.fish
 fish/fisher/conf.d/*.fish

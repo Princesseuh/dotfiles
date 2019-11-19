@@ -2,9 +2,10 @@ add_newline = false
 
 [directory]
 truncation_length = 3
-fish_style_pwd_dir_length = 3
+fish_style_pwd_dir_length = 0
 
 [git_branch]
+truncation_length = 18
 style = "bold green"
 
 [nodejs]

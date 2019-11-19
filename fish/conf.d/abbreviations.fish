@@ -6,4 +6,5 @@ if status --is-interactive
     abbr    --global        gs              git status
     abbr    --global        ga.             git add .
     abbr    --global        gaa             git add -A
+    abbr    --global        gm              git commit -m
 end

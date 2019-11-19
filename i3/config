@@ -162,20 +162,21 @@ focus_follows_mouse no
 mode "resize" {
         # These bindings trigger as soon as you enter the resize mode
 
-        # Pressing left will shrink the window’s width.
-        # Pressing right will grow the window’s width.
-        # Pressing up will shrink the window’s height.
-        # Pressing down will grow the window’s height.
-        bindsym j resize shrink width 10 px or 10 ppt
-        bindsym k resize grow height 10 px or 10 ppt
-        bindsym l resize shrink height 10 px or 10 ppt
-        bindsym semicolon resize grow width 10 px or 10 ppt
-
         # same bindings, but for the arrow keys
-        bindsym Left resize shrink width 10 px or 10 ppt
-        bindsym Down resize grow height 10 px or 10 ppt
-        bindsym Up resize shrink height 10 px or 10 ppt
-        bindsym Right resize grow width 10 px or 10 ppt
+        bindsym Left resize shrink width 5 px or 5 ppt
+        bindsym Down resize grow height 5 px or 5 ppt
+        bindsym Up resize shrink height 5 px or 5 ppt
+        bindsym Right resize grow width 5 px or 5 ppt
+
+        bindsym Shift+Left resize shrink width 10 px or 10 ppt
+        bindsym Shift+Down resize grow height 10 px or 10 ppt
+        bindsym Shift+Up resize shrink height 10 px or 10 ppt
+        bindsym Shift+Right resize grow width 10 px or 10 ppt
+
+        bindsym $mod+Left resize shrink width 2 px or 2 ppt
+        bindsym $mod+Down resize grow height 2 px or 2 ppt
+        bindsym $mod+Up resize shrink height 2 px or 2 ppt
+        bindsym $mod+Right resize grow width 2 px or 2 ppt
 
         # back to normal: Enter or Escape or $mod+r
         bindsym Return mode "default"
@@ -223,12 +224,12 @@ assign [class="Firefox"] $ws2
 assign [class="Spotify"] $ws10
 
 # Add borders
-for_window [class=".*"] border pixel 4
+for_window [class=".*"] border pixel 3
 
 # Add padding to title
 for_window [class=".*"] title_format " %title"
 
-gaps inner 14
+gaps inner 10
 gaps outer 0
 
 smart_gaps on

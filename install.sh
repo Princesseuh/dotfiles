@@ -5,7 +5,7 @@
 # List of packages to install
 # Pre-Wayland packages: "i3-gaps" "picom" "dunst" "nitrogen"
 
-packages=("sway" "waybar" "alacritty" "rofi" "fish" "bat" "fd" "fzf")
+packages=("sway" "swaylock" "waybar" "alacritty" "rofi" "fish" "bat" "fd" "fzf")
 
 echo "Install packages? This will install the following packages and their dependencies using pacman. This requires sudo (y/n):"
 printf '%s\n' "${packages[@]}"

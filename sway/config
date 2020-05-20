@@ -150,7 +150,7 @@ bindsym $mod+Shift+r restart
 # exit i3 (logs you out of your X session)
 bindsym $mod+Shift+e exec swaynag -t warning -m 'You pressed the exit shortcut. Do you really want to exit sway? This will end your Wayland session.' -b 'Yes, exit sway' 'swaymsg exit'
 
-bindsym $mod+l exec "i3lock -c 000000 -e"
+bindsym $mod+l exec "swaylock -c 000000 -e"
 
 # Quickly edit dotfiles
 bindsym $mod+k exec "code ~/dotfiles"

@@ -22,7 +22,7 @@ include "$HOME/.cache/wal/colors-sway"
     input * {
         xkb_layout ca
         xkb_variant fr
-
+        xkb_options caps:escape
     }
 
 # Font for window titles. Will also be used by the bar unless a different font
@@ -54,7 +54,7 @@ bindsym $mod+Down focus down
 bindsym $mod+Up focus up
 bindsym $mod+Right focus right
 
-# move focused window
+# move focused windowC
 bindsym $mod+Shift+j move left
 bindsym $mod+Shift+k move down
 bindsym $mod+Shift+l move up
@@ -144,17 +144,18 @@ workspace $ws3 output eDP-1-1
 workspace $ws10 output primary
 
 # reload the configuration file
-bindsym $mod+Shift+c reload
-# restart i3 inplace (preserves your layout/session, can be used to upgrade i3)
-bindsym $mod+Shift+r restart
-# exit i3 (logs you out of your X session)
+bindsym $mod+Shift+r reload
+
+# exit sway (logs you out of your X session)
 bindsym $mod+Shift+e exec swaynag -t warning -m 'You pressed the exit shortcut. Do you really want to exit sway? This will end your Wayland session.' -b 'Yes, exit sway' 'swaymsg exit'
 
+# lock session
 bindsym $mod+l exec "swaylock -c 000000 -e"
 
 # Quickly edit dotfiles
 bindsym $mod+k exec "code ~/dotfiles"
 
+# Media control
 bindsym XF86AudioPlay exec playerctl play-pause
 bindsym XF86AudioPause exec playerctl play-pause
 bindsym XF86AudioNext exec playerctl next
@@ -204,22 +205,11 @@ client.background       $background
 bindsym $mod+r mode "resize"
 
 # Add borders
-default_border pixel 3
+default_border pixel 2
 
 # Set a few windows to float
-for_window [window_role="task_dialog"] floating enable
 for_window [app_id="pavucontrol"] floating enable
-for_window [class="Gnome-calculator"] floating enable
-
-# Make all pop-up dialogues floating by default
-for_window [window_role="pop-up"] floating enable
-for_window [window_role="bubble"] floating enable
-for_window [window_role="task_dialog"] floating enable
-for_window [window_role="Preferences"] floating enable
-
-
-for_window [window_type="dialog"] floating enable
-for_window [window_type="menu"] floating enable
+for_window [app_id="gnome-calculator"] floating enable
 
 # Move some window to specific workspaces
 for_window [class="Discord"] move to workspace $ws9

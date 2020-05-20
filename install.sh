@@ -1,14 +1,11 @@
 #!/bin/bash
 
-get_abs_filename() {
-  # $1 : relative filename
-  echo "$(cd "$(dirname "$1")" && pwd)/$(basename "$1")"
-}
-
 #################### Packages ####################
 
 # List of packages to install
-packages=("i3-gaps" "alacritty" "dunst" "rofi" "fish" "bat" "fd" "fzf" "nitrogen" "python-dbus")
+# Pre-Wayland packages: "i3-gaps" "picom" "dunst" "nitrogen"
+
+packages=("sway" "waybar" "alacritty" "rofi" "fish" "bat" "fd" "fzf")
 
 echo "Install packages? This will install the following packages and their dependencies using pacman. This requires sudo (y/n):"
 printf '%s\n' "${packages[@]}"
@@ -33,14 +30,6 @@ then
 
     files=(".config/starship.toml")
 
-    read -p "Install xkbmap? (y/n)" -r
-    echo
-
-    if [[ $REPLY =~ ^[Yy]$ ]]
-    then
-        files=( "${files[@]}" ".xkbmap")
-    fi
-
     for i in "${files[@]}"
     do
         rm -f ~/$i
@@ -52,7 +41,7 @@ then
     echo "===== Symlinking dirs ====="
     echo "==========================="
 
-    dirs=("alacritty" "bat" "dunst" "i3" "polybar" "rofi" "fish" "picom")
+    dirs=("sway" "alacritty" "bat" "rofi" "fish" "waybar")
 
     for i in "${dirs[@]}"
     do

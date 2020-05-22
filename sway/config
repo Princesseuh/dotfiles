@@ -46,7 +46,7 @@ bindsym $mod+Return exec alacritty
 bindsym $mod+Shift+q kill
 
 # start rofi
-bindsym $mod+d exec rofi -show combi
+bindsym $mod+d exec rofi -show drun
 
 # alternatively, you can use the cursor keys:
 bindsym $mod+Left focus left
@@ -94,18 +94,18 @@ bindsym $mod+a focus parent
 
 workspace_auto_back_and_forth yes
 
-# Define names for default workspaces for which we configure key bindings later on.
+# Define names for default workspaces for which we configure key bindings later on.f
 # We use variables to avoid repeating the names in multiple places.
-set $ws1 "1"
-set $ws2 "2"
-set $ws3 "3"
+set $ws1 "1:home"
+set $ws2 "2:web"
+set $ws3 "3:code"
 set $ws4 "4"
 set $ws5 "5"
 set $ws6 "6"
 set $ws7 "7"
 set $ws8 "8"
-set $ws9 "9"
-set $ws10 "10"
+set $ws9 "chat"
+set $ws10 "music"
 
 # switch to workspace
 bindsym $mod+1 workspace $ws1
@@ -138,10 +138,9 @@ bindsym XF86Launch7 workspace $ws3
 bindsym XF86Launch8 workspace $ws4
 bindsym XF86Launch9 workspace $ws5
 
-workspace $ws1 output primary
-workspace $ws2 output DP-1-1
-workspace $ws3 output eDP-1-1
-workspace $ws10 output primary
+workspace $ws1 output DVI-D-1
+workspace $ws2 output DP-1
+workspace $ws10 output DVI-D-1
 
 # reload the configuration file
 bindsym $mod+Shift+r reload
@@ -193,19 +192,19 @@ mode "resize" {
         bindsym $mod+r mode "default"
 }
 
-# class                 border  backgr. text    indicatorchild_border
-client.focused          $color3     $color3    $foreground     $background             $color3
-client.focused_inactive $background     $background     $foreground     $background             $background
-client.unfocused        $background     $background     $foreground     $background             $background
-client.urgent           $background     $background     $foreground     $background             $background
-client.placeholder      $background     $background     $foreground     $background             $background
+# class                 border          backgr.         text            indicator       child_border
+client.focused          $color3         $color3         $foreground     #B2BAFF         $color3
+client.focused_inactive $background     $background     $foreground     $background     $background
+client.unfocused        $background     $background     $foreground     $background     $background
+client.urgent           $background     $background     $foreground     $background     $background
+client.placeholder      $background     $background     $foreground     $background     $background
 
 client.background       $background
 
 bindsym $mod+r mode "resize"
 
 # Add borders
-default_border pixel 2
+default_border pixel 3
 
 # Set a few windows to float
 for_window [app_id="pavucontrol"] floating enable
@@ -222,13 +221,18 @@ assign [class="Spotify"] $ws10
 gaps inner 10
 gaps outer 0
 
+bar {
+    swaybar_command waybar
+}
+
 # Auto-start those programs
 exec wal -R -n --vte
 exec /usr/lib/policykit-1-gnome/polkit-gnome-authentication-agent-1 &
 exec discord
 exec spotify
 exec autotiling
-exec waybar
 
 # We need to delay Keepassxc's launch otherwise it won't minimize properly on launch
 exec "sh -c 'sleep 5; exec keepassxc'"
+
+include /etc/sway/config.d/*

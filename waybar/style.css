@@ -42,29 +42,28 @@ window#waybar {
     border-bottom: 3px solid white;
 }
 
-#clock, #custom-spotify, #tray, #mode {
+#clock, #custom-spotify, #custom-updates, #tray, #mode {
     padding: 0 7px;
     margin: 0 2px;
 }
 
+#custom-updates {
+    color: rgb(124, 103, 201);
+    background-color: rgba(118, 102, 176, 0.25)
+}
+
 #custom-spotify {
+    color: rgb(102, 220, 105);
+    background-color: rgba(102, 220, 105, 0.1);
     margin-right: 0;
 }
 
 #tray {
+    background-color: rgba(0, 0, 0, 0.1);
     padding-left: 12px;
     margin-left: 0;
 }
 
 #clock {
     font-weight: bold;
-}
-
-#custom-spotify {
-    color: rgb(102, 220, 105);
-    background-color: rgba(102, 220, 105, 0.1);
-}
-
-#tray {
-    background-color: rgba(0, 0, 0, 0.1);
 }

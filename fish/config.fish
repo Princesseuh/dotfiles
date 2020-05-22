@@ -10,7 +10,17 @@ end
 
 # Fish settings
 set fish_greeting ""
-set fish_color_search_match --background='333'
+
+# Colors
+set fish_color_command 5863A6
+set fish_color_param 5F68A1
+set fish_color_error A84055
+set fish_color_quote 6753A6
+set fish_color_escape 9E80FF
+set fish_color_search_match --background='605C73'
+set fish_pager_color_description 928181
+set fish_pager_color_completion d1b9b9
+set fish_pager_color_progress d1b9b9 --background='48425D'
 
 if not functions -q fisher
     set -q XDG_CONFIG_HOME; or set XDG_CONFIG_HOME ~/.config

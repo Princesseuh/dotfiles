@@ -7,7 +7,7 @@
     // Choose the order of the modules
     "modules-left": ["sway/workspaces", "sway/mode", "sway/window"],
     "modules-center": ["clock"],
-    "modules-right": ["custom/spotify", "tray"],
+    "modules-right": ["custom/updates", "custom/spotify", "tray"],
     "sway/window": {
         "tooltip": false
     },
@@ -43,7 +43,10 @@
         "interval": 1,
         "return-type": "json",
         "exec": "~/.config/waybar/modules/spotify.sh",
-        "exec-if": "pgrep spotify",
-        "escape": false
+        "exec-if": "pgrep spotify"
+    },
+    "custom/updates": {
+        "interval": 60,
+        "exec": "~/.config/waybar/modules/updates.sh"
     }
 }

@@ -1,0 +1,6 @@
+{
+    "files.associations": {
+        "**/waybar/config": "jsonc",
+        "**/sway/config": "i3"
+    }
+}

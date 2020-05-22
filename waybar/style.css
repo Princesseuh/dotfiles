@@ -1,74 +1,70 @@
 * {
-	font-size: 20px;
-	font-family: monospace;
+    border: none;
+    border-radius: 0;
+    font-family: "Fira Code Nerd Font Mono";
+    min-height: 0;
 }
 
 window#waybar {
-	background: #292b2e;
-	color: #fdf6e3;
+    background-color: rgba(12, 16, 30, 0.3);
+    color: #FAF6F6;
+    font-size: 13px;
 }
 
-#custom-right-arrow-dark,
-#custom-left-arrow-dark {
-	color: #1a1a1a;
-}
-#custom-right-arrow-light,
-#custom-left-arrow-light {
-	color: #292b2e;
-	background: #1a1a1a;
-}
-
-#workspaces,
-#clock.1,
-#clock.2,
-#clock.3,
-#pulseaudio,
-#memory,
-#cpu,
-#battery,
-#disk,
-#tray {
-	background: #1a1a1a;
+#window {
+    font-weight: bold;
+    font-family: "Ubuntu";
+    margin-left: 20px;
 }
 
 #workspaces button {
-	padding: 0 2px;
-	color: #fdf6e3;
+    padding: 0 13px;
+    background: transparent;
+    border-bottom: 2px solid rgba(255, 255, 255, 0.3);
+    color: rgba(255, 255, 255, 0.3);
+    font-size: 22px;
 }
+
 #workspaces button.focused {
-	color: #268bd2;
-}
-#workspaces button:hover {
-	box-shadow: inherit;
-	text-shadow: inherit;
-}
-#workspaces button:hover {
-	background: #1a1a1a;
-	border: #1a1a1a;
-	padding: 0 3px;
+    color: 	#FAF6F6;
+    border-bottom: 2px solid #FAF6F6;
 }
 
-#pulseaudio {
-	color: #268bd2;
-}
-#memory {
-	color: #2aa198;
-}
-#cpu {
-	color: #6c71c4;
-}
-#battery {
-	color: #859900;
-}
-#disk {
-	color: #b58900;
+#workspaces button:hover {
+    color: #FAF6F6;
+    border-bottom-color: #FAF6F6;
+    box-shadow: inherit;
+    text-shadow: inherit;
 }
 
-#clock,
-#pulseaudio,
-#memory,
-#cpu,
-#battery,
-#disk {
-	padding: 0 10px;
+#mode {
+    background: #64727D;
+    border-bottom: 3px solid white;
+}
+
+#clock, #custom-spotify, #tray, #mode {
+    padding: 0 7px;
+    margin: 0 2px;
+}
+
+#custom-spotify {
+    margin-right: 0;
+}
+
+#tray {
+    padding-left: 12px;
+    margin-left: 0;
+}
+
+#clock {
+    font-weight: bold;
+}
+
+#custom-spotify {
+    color: rgb(102, 220, 105);
+    background-color: rgba(102, 220, 105, 0.1);
+}
+
+#tray {
+    background-color: rgba(0, 0, 0, 0.1);
 }

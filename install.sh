@@ -5,7 +5,7 @@
 # List of packages to install
 # Pre-Wayland packages: "i3-gaps" "picom" "dunst" "nitrogen"
 
-packages=("sway" "swaylock" "waybar" "alacritty" "rofi" "fish" "bat" "fd" "fzf" "xorg-server-xwayland")
+packages=("sway" "swaylock" "waybar" "alacritty" "rofi" "fish" "bat" "fd" "fzf" "xorg-server-xwayland", "nerd-fonts-fira-code")
 
 echo "Install packages? This will install the following packages and their dependencies using pacman. This requires sudo (y/n):"
 printf '%s\n' "${packages[@]}"
@@ -41,7 +41,7 @@ then
     echo "===== Symlinking dirs ====="
     echo "==========================="
 
-    dirs=("sway" "alacritty" "bat" "rofi" "fish" "waybar")
+    dirs=("sway" "alacritty" "bat" "rofi" "fish" "waybar" "mako")
 
     for i in "${dirs[@]}"
     do

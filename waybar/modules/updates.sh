@@ -13,9 +13,9 @@ fi
 updates=$(("$updates_arch" + "$updates_aur"))
 
 if [ "$updates" -gt 0 ] && [ "$updates" -lt 2 ]; then
-    echo "$icon <b>$updates uppdatering tillgänglig</b>"
+    echo "$icon <b>$updates</b> uppdatering tillgänglig"
 elif [ "$updates" -gt 1 ]; then
-    echo "$icon <b>$updates uppdateringar tillgängliga</b>"
+    echo "$icon <b>$updates</b> uppdateringar tillgängliga"
 else
     echo "$icon"
 fi

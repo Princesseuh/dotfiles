@@ -48,8 +48,8 @@ window#waybar {
 }
 
 #custom-updates {
-    color: rgb(124, 103, 201);
-    background-color: rgba(118, 102, 176, 0.25)
+    color: rgb(171, 156, 224);
+    background-color: rgba(171, 156, 224, 0.1)
 }
 
 #custom-spotify {

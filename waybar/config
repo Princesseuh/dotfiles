@@ -36,8 +36,10 @@
         "spacing": 8
     },
     "clock": {
-        "format": "{:%a %d %b %H:%M}",
-        "format-alt": "{:%Y-%m-%d}"
+        "interval": 1,
+        "format": "{:%A, %d %B %H:%M}",
+        "format-alt": "{:%A, %d %B %H:%M:%S}",
+        "tooltip-format": "<big>{:%Y %B}</big>\n<tt><small>{calendar}</small></tt>"
     },
     "custom/spotify": {
         "interval": 1,

@@ -175,6 +175,7 @@ bindsym XF86AudioLowerVolume exec pactl set-sink-volume 0 -5% #decrease sound vo
 bindsym XF86AudioMute exec pactl set-sink-mute 0 toggle # mute sound
 
 focus_follows_mouse no
+mouse_warping none
 
 # resize window (you can also use the mouse for that)
 mode "resize" {
@@ -221,10 +222,9 @@ for_window [app_id="pavucontrol"] floating enable
 for_window [app_id="gnome-calculator"] floating enable
 
 # Move some window to specific workspaces
-for_window [class="Discord"] move window to workspace $ws9
+for_window [class="discord"] move window to workspace $ws9
 for_window [class="Spotify"] move window to workspace $ws10
 
-assign [class="Firefox"] $ws2
 assign [class="discord"] $ws9
 assign [class="Spotify"] $ws10
 

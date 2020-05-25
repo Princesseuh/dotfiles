@@ -13,9 +13,12 @@ fi
 updates=$(("$updates_arch" + "$updates_aur"))
 
 if [ "$updates" -gt 0 ] && [ "$updates" -lt 2 ]; then
-    echo "$icon <b>$updates</b> uppdatering tillgänglig"
+    text="$icon <b>$updates</b> uppdatering tillgänglig"
+    echo -e "{\"text\":\""$text"\", \"class\":\"updates\"}"
 elif [ "$updates" -gt 1 ]; then
-    echo "$icon <b>$updates</b> uppdateringar tillgängliga"
+    text="$icon <b>$updates</b> uppdateringar tillgängliga"
+    echo -e "{\"text\":\""$text"\", \"class\":\"updates\"}"
 else
-    echo "$icon"
+    text="$icon inga uppdateringar"
+    echo -e "{\"text\":\""$text"\", \"class\":\"no-updates\"}"
 fi

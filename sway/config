@@ -15,8 +15,8 @@ include "$HOME/.cache/wal/colors-sway"
         set $term alacritty
 
 ### Output configuration
-    output DVI-D-1 bg $wallpaper fill pos 0 0 res 1920x1080@144hz
-    output DP-1 bg $wallpaper fill pos 1920 0 res 1920x1080
+    output DVI-D-1 bg $wallpaper fill pos 0 0 res 1920x1080@144hz max_render_time 1
+    output DP-1 bg $wallpaper fill pos 1920 0 res 1920x1080 max_render_time 1
     focus output DVI-D-1
 
 ### Input configuration
@@ -51,7 +51,7 @@ bindsym $mod+d exec rofi -show drun
 
 # capture screen
 bindsym $mod+p exec grim -g "$(slurp -d)" -t png - | wl-copy -t image/png
-bindsym $mod+Shift+p exec ~/dotfiles/scripts/screenshot-window.sh
+bindsym $mod+Shift+p exec screenshot-window
 bindsym Print exec grim - | wl-copy -t image/png
 bindsym Shift+Print exec grim -o $(swaymsg -t get_outputs | jq -r '.[] | select(.focused) | .name') - | wl-copy -t image/png
 
@@ -214,8 +214,11 @@ client.background       $background
 
 bindsym $mod+r mode "resize"
 
-# Add borders
+# Set borders and gaps
 default_border pixel 3
+
+gaps inner 10
+gaps outer 0
 
 # Set a few windows to float
 for_window [app_id="pavucontrol"] floating enable
@@ -228,21 +231,18 @@ for_window [class="Spotify"] move window to workspace $ws10
 assign [class="discord"] $ws9
 assign [class="Spotify"] $ws10
 
-gaps inner 10
-gaps outer 0
-
 bar {
     swaybar_command waybar
 }
 
-# Auto-start those programs
+# Auto-start programs
 exec wal -R -n --vte
-exec /usr/lib/policykit-1-gnome/polkit-gnome-authentication-agent-1 &
-exec discord
-exec spotify
+exec /usr/lib/polkit-gnome/polkit-gnome-authentication-agent-1 &
 exec autotiling
 
-# We need to delay Keepassxc's launch otherwise it won't minimize properly on launch
-exec "sh -c 'sleep 5; exec keepassxc'"
+exec discord
+exec spotify
+exec caprine
+exec keepassxc
 
 include /etc/sway/config.d/*

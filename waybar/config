@@ -37,18 +37,20 @@
     },
     "clock": {
         "interval": 1,
-        "format": "{:%A, %d %B %H:%M}",
-        "format-alt": "{:%A, %d %B %H:%M:%S}",
+        "format": "{:%A, %d %B · %H:%M}",
+        "format-alt": "{:%A, %d %B · %H:%M:%S}",
         "tooltip-format": "<big>{:%Y %B}</big>\n<tt><small>{calendar}</small></tt>"
     },
     "custom/spotify": {
         "interval": 1,
         "return-type": "json",
         "exec": "~/.config/waybar/modules/spotify.sh",
-        "exec-if": "pgrep spotify"
+        "exec-if": "pgrep spotify",
+        "on-click": "swaymsg '[class=\"Spotify\"] focus'"
     },
     "custom/updates": {
         "interval": 60,
+        "return-type": "json",
         "exec": "~/.config/waybar/modules/updates.sh"
     }
 }

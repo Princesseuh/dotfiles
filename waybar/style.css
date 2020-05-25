@@ -26,8 +26,8 @@ window#waybar {
 }
 
 #workspaces button.visible {
-    color: rgba(250, 246, 246, 0.65);
-    border-bottom: 2px solid rgba(250, 246, 246, 0.60);
+    color: rgba(250, 246, 246, 0.55);
+    border-bottom: 2px solid rgba(250, 246, 246, 0.55);
 }
 
 #workspaces button.focused {
@@ -57,10 +57,19 @@ window#waybar {
     background-color: rgba(171, 156, 224, 0.1)
 }
 
+#custom-updates.no-updates {
+    color: rgba(171, 156, 224, 0.3);
+    background-color: rgba(171, 156, 224, 0.1)
+}
+
 #custom-spotify {
     color: rgb(102, 220, 105);
     background-color: rgba(102, 220, 105, 0.1);
     margin-right: 0;
+}
+
+#custom-spotify.paused {
+    color: rgba(102, 220, 105, 0.3);
 }
 
 #tray {

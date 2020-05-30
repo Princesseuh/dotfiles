@@ -68,7 +68,7 @@ window#waybar {
     margin-right: 0;
 }
 
-#custom-spotify.paused {
+#custom-spotify.paused, #custom-spotify.stopped {
     color: rgba(102, 220, 105, 0.3);
 }
 

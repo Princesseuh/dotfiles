@@ -10,7 +10,7 @@ if [[ $class == "playing" ]] || [[ $class == "paused" ]]; then
   fi
   text=$icon" "$info
 elif [[ $class == "stopped" ]]; then
-  text=""
+  text="$icon"
 fi
 
 echo -e "{\"text\":\""$text"\", \"class\":\""$class"\"}"

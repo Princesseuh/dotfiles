@@ -50,10 +50,10 @@ bindsym $mod+Shift+q kill
 bindsym $mod+d exec rofi -show drun
 
 # capture screen
-bindsym $mod+p exec grim -g "$(slurp -d)" -t png - | wl-copy -t image/png
-bindsym $mod+Shift+p exec screenshot-window
-bindsym Print exec grim - | wl-copy -t image/png
-bindsym Shift+Print exec grim -o $(swaymsg -t get_outputs | jq -r '.[] | select(.focused) | .name') - | wl-copy -t image/png
+bindsym $mod+p exec fish -c "screenshot zone"
+bindsym $mod+Shift+p exec fish -c "screenshot window"
+bindsym Print exec fish -c "screenshot focused-output"
+bindsym Shift+Print exec fish -c "screenshot full"
 
 # alternatively, you can use the cursor keys:
 bindsym $mod+Left focus left

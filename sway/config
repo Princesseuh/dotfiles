@@ -50,10 +50,10 @@ bindsym $mod+Shift+q kill
 bindsym $mod+d exec rofi -show drun
 
 # capture screen
-bindsym $mod+p exec fish -c "screenshot zone"
-bindsym $mod+Shift+p exec fish -c "screenshot window"
-bindsym Print exec fish -c "screenshot focused-output"
-bindsym Shift+Print exec fish -c "screenshot full"
+bindsym $mod+p exec grimshot --notify copy area
+bindsym $mod+Shift+p exec grimshot --notify copy window
+bindsym Print exec grimshot --notify copy output
+bindsym Shift+Print exec grimshot --notify copy screen
 
 # alternatively, you can use the cursor keys:
 bindsym $mod+Left focus left

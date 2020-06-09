@@ -49,7 +49,7 @@
         "on-click": "swaymsg '[class=\"Spotify\"] focus'"
     },
     "custom/updates": {
-        "interval": 60,
+        "interval": 300,
         "return-type": "json",
         "exec": "~/.config/waybar/modules/updates.sh"
     }

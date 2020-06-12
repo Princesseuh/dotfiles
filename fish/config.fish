@@ -1,8 +1,5 @@
 cat ~/.cache/wal/sequences &
 
-# Add script directory to $PATH
-set -U fish_user_paths ~/dotfiles/scripts $fish_user_paths
-
 # Start Sway at login
 if status is-login
     if test -z "$DISPLAY" -a $XDG_VTNR = 1
@@ -11,7 +8,7 @@ if status is-login
 end
 
 # Fish settings
-set fish_greeting ""
+set -U fish_greeting
 
 # Colors
 set fish_color_command 5863A6

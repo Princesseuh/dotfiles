@@ -167,7 +167,7 @@ bindsym $mod+Shift+e exec swaynag -t warning -m 'You pressed the exit shortcut. 
 bindsym $mod+i exec "swaylock -c 000000 -e"
 
 # Quickly edit dotfiles
-bindsym $mod+k exec "code ~/dotfiles"
+bindsym $mod+x exec "code ~/dotfiles"
 
 # Media control
 bindsym XF86AudioPlay exec playerctl play-pause

@@ -51,6 +51,7 @@
     "custom/updates": {
         "interval": 300,
         "return-type": "json",
-        "exec": "~/.config/waybar/modules/updates.sh"
+        "exec": "~/.config/waybar/modules/updates.sh",
+        "signal": 5
     }
 }

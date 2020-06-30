@@ -225,6 +225,10 @@ default_border pixel 3
 gaps inner 10
 gaps outer 0
 
+# Add hotkeys for resizing gaps, one day I'd like to add a real mode to do so
+bindsym $mod+y exec swaymsg gaps inner all set 0
+bindsym $mod+t exec swaymsg gaps inner all set 10
+
 # Set a few windows to float
 for_window [app_id="pavucontrol"] floating enable
 for_window [app_id="gnome-calculator"] floating enable

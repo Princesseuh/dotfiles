@@ -16,7 +16,7 @@ include "$HOME/.cache/wal/colors-sway"
 
 ### Output configuration
     output DVI-D-1 bg $wallpaper fill pos 0 0 res 1920x1080@144hz max_render_time 1
-    output DP-1 bg $wallpaper fill pos 1920 0 res 1920x1080 max_render_time 1
+    output DP-2 bg $wallpaper fill pos 1920 0 res 1920x1080 max_render_time 1
     focus output DVI-D-1
 
 ### Input configuration
@@ -245,13 +245,6 @@ bar {
 }
 
 # Auto-start programs
-exec wal -R -n --vte
-exec /usr/lib/polkit-gnome/polkit-gnome-authentication-agent-1 &
-exec autotiling
-
-exec discord
-exec spotify
-exec caprine
-exec keepassxc
+include ./autostart
 
 include /etc/sway/config.d/*

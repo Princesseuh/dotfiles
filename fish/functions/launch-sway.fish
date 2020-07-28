@@ -3,7 +3,6 @@ function launch-sway --description 'Set various environment variables for Waylan
     set -x QT_QPA_PLATFORM wayland
     set -x QT_QPA_PLATFORMTHEME qt5ct
     set -x CLUTTER_BACKEND wayland
-    set -x SDL_VIDEODRIVER wayland
 
     sway
 end

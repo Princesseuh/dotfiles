@@ -1,0 +1,12 @@
+exec wal -R -n --vte
+exec /usr/lib/polkit-gnome/polkit-gnome-authentication-agent-1 &
+exec autotiling
+
+exec spotify
+exec caprine
+
+# We need to delay Keepassxc's launch otherwise it won't minimize properly on launch
+exec "sh -c 'sleep 5; exec keepassxc'"
+
+# We delay Discord launch because otherwise it launch before internet is ready and get stuck into a multiple seconds timeout
+exec "sh -c 'sleep 2; exec discord'"

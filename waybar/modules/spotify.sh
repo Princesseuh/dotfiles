@@ -5,7 +5,7 @@ icon="<span size='xx-large' rise='-2100'></span>"
 
 if [[ $class == "playing" ]] || [[ $class == "paused" ]]; then
   info=$(playerctl metadata --player=spotify --format '{{artist}} - {{title}}')
-  if [[ ${#info} > 40 ]]; then
+  if [[ ${#info} -ge 40 ]]; then
     info=$(echo -e $info | colrm 40)"..."
   fi
   text=$icon" "$info

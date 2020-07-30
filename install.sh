@@ -5,9 +5,9 @@
 # List of packages to install
 # Pre-Wayland packages: "i3-gaps" "picom" "dunst" "nitrogen"
 
-packages=("sway" "swaylock" "waybar" "alacritty" "rofi" "fish" "bat" "fd" "fzf" "xorg-server-xwayland" "polkit-gnome")
+packages=("sway" "swaylock" "swaybg" "waybar" "alacritty" "rofi" "fish" "bat" "fd" "fzf" "xorg-server-xwayland" "polkit-gnome")
 
-echo "Install packages? This will install the following packages and their dependencies using pacman. This requires sudo (y/n):"
+echo "Install packages? This will install the following packages and their dependencies using pacman. This requires sudo (y/n) "
 printf '%s\n' "${packages[@]}"
 read -r
 echo
@@ -19,7 +19,8 @@ fi
 
 #################### Config Symlinks ####################
 
-read -p "Symlink files and directories? (y/n)" -r
+read -p "Symlink files and directories? (y/n)
+WARNING: This can result in data loss, make sure to backup your current settings if they exist! " -r
 echo
 
 if [[ $REPLY =~ ^[Yy]$ ]]
@@ -54,7 +55,7 @@ fi
 #################### Fish ####################
 
 echo
-read -p "Set Fish as default shell? (y/n)" -r
+read -p "Set Fish as default shell? (y/n) " -r
 echo
 
 if [[ $REPLY =~ ^[Yy]$ ]]

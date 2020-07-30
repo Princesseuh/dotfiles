@@ -154,7 +154,7 @@ bindsym XF86Launch8 workspace $ws4
 bindsym XF86Launch9 workspace $ws5
 
 workspace $ws1 output DVI-D-1
-workspace $ws2 output DP-1
+workspace $ws2 output DP-2
 workspace $ws10 output DVI-D-1
 
 # reload the configuration file

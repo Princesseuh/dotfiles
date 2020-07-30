@@ -49,9 +49,10 @@
         "on-click": "swaymsg '[class=\"Spotify\"] focus'"
     },
     "custom/updates": {
-        "interval": 300,
+        "interval": 3600,
         "return-type": "json",
         "exec": "~/.config/waybar/modules/updates.sh",
-        "signal": 5
+        "on-click": "alacritty -e fish -c 'yay;pkill -RTMIN+8 waybar;read -n 1 -s -r'",
+        "signal": 8
     }
 }

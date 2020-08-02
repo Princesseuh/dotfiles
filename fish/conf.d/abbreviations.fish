@@ -5,9 +5,12 @@ if status --is-interactive
 
     # Git stuff
     abbr    --global        gs              git status
+    abbr    --global        ga              git add
     abbr    --global        ga.             git add .
     abbr    --global        gaa             git add -A
     abbr    --global        gm              git commit -m
+    abbr    --global        gca             git commit --amend
     abbr    --global        gp              git push
+    abbr    --global        gd              git diff
     abbr    --global        cg              "cd (git rev-parse --show-toplevel)"
 end

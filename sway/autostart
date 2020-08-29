@@ -9,4 +9,4 @@ exec caprine
 exec "sh -c 'sleep 5; exec keepassxc'"
 
 # We delay Discord launch because otherwise it launch before internet is ready and get stuck into a multiple seconds timeout
-exec "sh -c 'sleep 2; exec discord'"
+exec "sh -c 'sleep 5; exec discord'"

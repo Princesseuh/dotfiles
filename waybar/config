@@ -18,7 +18,7 @@
         "format": "{icon}",
         "format-icons": {
             "1:home": "",
-            "2:web": "",
+            "2:web": "",
             "3:code": "",
             "4:term": "",
             "chat": "ﭮ",
@@ -52,7 +52,7 @@
         "interval": 3600,
         "return-type": "json",
         "exec": "~/.config/waybar/modules/updates.sh",
-        "on-click": "kitty -e fish -c 'yay;pkill -RTMIN+8 waybar;read -n 1 -s -r'",
+        "on-click": "kitty -e fish -i -c 'yay;pkill -RTMIN+8 waybar;read -n 1 -s -r'",
         "signal": 8
     }
 }

@@ -1,5 +1,7 @@
 if status --is-interactive
     abbr    --global        c               clear
+
+    # cd shortcuts when I don't feel like using z
     abbr    --global        dots            cd $HOME/dotfiles
     abbr    --global        work            cd $HOME/work
 
@@ -13,4 +15,7 @@ if status --is-interactive
     abbr    --global        gp              git push
     abbr    --global        gd              git diff
     abbr    --global        cg              "cd (git rev-parse --show-toplevel)"
+
+    # Misc
+    abbr    --global        m               math
 end

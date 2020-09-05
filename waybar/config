@@ -7,7 +7,7 @@
     // Choose the order of the modules
     "modules-left": ["sway/workspaces", "sway/mode", "sway/window"],
     "modules-center": ["clock"],
-    "modules-right": ["custom/updates", "custom/spotify", "tray"],
+    "modules-right": ["custom/updates", "custom/spotify", "custom/recording", "tray"],
     "sway/window": {
         "tooltip": false
     },
@@ -54,5 +54,11 @@
         "exec": "~/.config/waybar/modules/updates.sh",
         "on-click": "kitty -e fish -i -c 'yay;pkill -RTMIN+8 waybar;read -n 1 -s -r'",
         "signal": 8
+    },
+    "custom/recording": {
+        "interval": "once",
+        "exec": "~/.config/waybar/modules/recording.sh",
+        "on-click": "fish -c 'record-screen'",
+        "signal": 9
     }
 }

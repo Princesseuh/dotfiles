@@ -47,7 +47,7 @@ window#waybar {
     border-bottom: 3px solid white;
 }
 
-#clock, #custom-spotify, #custom-updates, #tray, #mode {
+#clock, #custom-spotify, #custom-updates, #custom-recording, #tray, #mode {
     padding: 0 7px;
     margin: 0 2px;
 }
@@ -70,6 +70,11 @@ window#waybar {
 
 #custom-spotify.paused, #custom-spotify.stopped {
     color: rgba(102, 220, 105, 0.3);
+}
+
+#custom-recording {
+    color: rgb(245, 46, 39);
+    background-color: rgba(245, 46, 39, 0.1)
 }
 
 #tray {

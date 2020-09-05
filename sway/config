@@ -55,6 +55,8 @@ bindsym $mod+Shift+p exec grimshot --notify copy window
 bindsym Print exec grimshot --notify copy output
 bindsym Shift+Print exec grimshot --notify copy screen
 
+bindsym $mod+o exec "fish -i -c 'record-screen zone'"
+bindsym $mod+Shift+o exec "fish -i -c 'record-screen window'"
 # Movement
 bindsym $mod+Left focus left
 bindsym $mod+Down focus down
@@ -107,7 +109,7 @@ bindsym $mod+a focus parent
 # focus the child container
 #bindsym $mod+d focus child
 
-workspace_auto_back_and_forth yes
+workspace_auto_back_and_forth no
 
 # Define names for default workspaces for which we configure key bindings later on.f
 # We use variables to avoid repeating the names in multiple places.

@@ -1,0 +1,21 @@
+#!/bin/sh
+
+# Usage Guide
+# sh/Bash: wait_for_internet {seconds} && command
+# Fish: wait_for_internet {seconds}; and command
+
+# seconds is an optional argument with a default value of 15
+# Return 0 if succesful, 1 if not
+
+max_tries=${1:-15}
+
+_c=1
+while ! ping -c 1 -W 1 1.1.1.1 -q > /dev/null; do
+    echo "Waiting for internet... " $_c
+    ((_c++)) && ((_c==max_tries+1)) && echo "Couldn't find internet in $max_tries seconds" && exit 1
+
+    sleep 1
+done
+
+echo "We found internet! Exiting..."
+exit 0

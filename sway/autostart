@@ -8,5 +8,5 @@ exec caprine
 # We need to delay Keepassxc's launch otherwise it won't minimize properly on launch
 exec "sh -c 'sleep 5; exec keepassxc'"
 
-# We delay Discord launch because otherwise it launch before internet is ready and get stuck into a multiple seconds timeout
-exec "sh -c 'sleep 5; exec discord'"
+# We wait for internet to be ready before launching Discord because otherwise it'll get stuck in a multiple seconds timeout
+exec "sh -c 'wait_for_internet && exec discord'"

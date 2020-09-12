@@ -12,7 +12,7 @@ include "$HOME/.cache/wal/colors-sway"
         set $right l
 
     # Terminal
-        set $term kitty
+        set $term kitty -1
 
 ### Output configuration
     output DVI-D-1 bg $wallpaper fill pos 0 0 res 1920x1080@144hz max_render_time 1
@@ -111,7 +111,7 @@ bindsym $mod+a focus parent
 
 workspace_auto_back_and_forth no
 
-# Define names for default workspaces for which we configure key bindings later on.f
+# Define names for default workspaces for which we configure key bindings later on.
 # We use variables to avoid repeating the names in multiple places.
 set $ws1 "1:home"
 set $ws2 "2:web"

@@ -61,6 +61,7 @@ echo
 if [[ $REPLY =~ ^[Yy]$ ]]
 then
     chsh -s $(which fish)
+    fish -i -c "set -U fish_user_paths $HOME/dotfiles/scripts $fish_user_paths"
 fi
 
 # -=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-

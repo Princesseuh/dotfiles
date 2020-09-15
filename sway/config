@@ -14,239 +14,45 @@ include "$HOME/.cache/wal/colors-sway"
     # Terminal
         set $term kitty -1
 
-### Output configuration
-    output DVI-D-1 bg $wallpaper fill pos 0 0 res 1920x1080@144hz max_render_time 1
-    output DP-2 bg $wallpaper fill pos 1920 0 res 1920x1080 max_render_time 1
-    focus output DVI-D-1
+    # Workspaces
+        set $ws1 "1:home"
+        set $ws2 "2:web"
+        set $ws3 "3:code"
+        set $ws4 "4"
+        set $ws5 "5"
+        set $ws6 "6"
+        set $ws7 "7"
+        set $ws8 "8"
+        set $ws9 "chat"
+        set $ws10 "music"
+
+### Outputs
+include ./outputs
 
 ### Input configuration
+
     input * {
         xkb_layout ca
         xkb_variant fr
         xkb_options caps:escape
     }
 
-# Font for window titles. Will also be used by the bar unless a different font
-# is used in the bar {} block below.
-font pango: Fira Code Nerd Font 10
+### Keybinds
+include ./keybinds
 
-# This font is widely installed, provides lots of unicode glyphs, right-to-left
-# text rendering and scalability on retina/hidpi displays (thanks to pango).
-#font pango:DejaVu Sans Mono 8
-
-# Use Mouse+$mod to drag floating windows to their wanted position
-floating_modifier $mod
-
-
-### Key bindings
-
-# start a terminal
-bindsym $mod+Return exec $term
-
-# kill focused window
-bindsym $mod+Shift+q kill
-
-# start rofi
-bindsym $mod+d exec rofi -show drun
-
-# capture screen
-bindsym $mod+p exec grimshot --notify copy area
-bindsym $mod+Shift+p exec grimshot --notify copy window
-bindsym Print exec grimshot --notify copy output
-bindsym Shift+Print exec grimshot --notify copy screen
-
-bindsym $mod+o exec "fish -i -c 'record-screen zone'"
-bindsym $mod+Shift+o exec "fish -i -c 'record-screen window'"
-# Movement
-bindsym $mod+Left focus left
-bindsym $mod+Down focus down
-bindsym $mod+Up focus up
-bindsym $mod+Right focus right
-
-bindsym $mod+$left focus left
-bindsym $mod+$down focus down
-bindsym $mod+$up focus up
-bindsym $mod+$right focus right
-
-# move focused window
-bindsym $mod+Shift+$left move left
-bindsym $mod+Shift+$down move down
-bindsym $mod+Shift+$up move up
-bindsym $mod+Shift+$right move right
-
-# alternatively, you can use the cursor keys:
-bindsym $mod+Shift+Left move left
-bindsym $mod+Shift+Down move down
-bindsym $mod+Shift+Up move up
-bindsym $mod+Shift+Right move right
-
-# move focused window to another output
-bindsym $mod+Tab move workspace to output right
-
-# split in horizontal
-bindsym $mod+g split h
-
-# split in vertical orientation
-bindsym $mod+v split v
-
-# enter fullscreen mode for the focused container
-bindsym $mod+f fullscreen toggle
-
-# change container layout (stacked, tabbed, toggle split)
-bindsym $mod+s layout stacking
-bindsym $mod+w layout tabbed
-bindsym $mod+e layout toggle split
-
-# toggle tiling / floating
-bindsym $mod+Shift+space floating toggle
-
-# change focus between tiling / floating windows
-bindsym $mod+space focus mode_toggle
-
-# focus the parent container
-bindsym $mod+a focus parent
-
-# focus the child container
-#bindsym $mod+d focus child
-
-workspace_auto_back_and_forth no
-
-# Define names for default workspaces for which we configure key bindings later on.
-# We use variables to avoid repeating the names in multiple places.
-set $ws1 "1:home"
-set $ws2 "2:web"
-set $ws3 "3:code"
-set $ws4 "4"
-set $ws5 "5"
-set $ws6 "6"
-set $ws7 "7"
-set $ws8 "8"
-set $ws9 "chat"
-set $ws10 "music"
-
-# switch to workspace
-bindsym $mod+1 workspace $ws1
-bindsym $mod+2 workspace $ws2
-bindsym $mod+3 workspace $ws3
-bindsym $mod+4 workspace $ws4
-bindsym $mod+5 workspace $ws5
-bindsym $mod+6 workspace $ws6
-bindsym $mod+7 workspace $ws7
-bindsym $mod+8 workspace $ws8
-bindsym $mod+9 workspace $ws9
-bindsym $mod+0 workspace $ws10
-
-# move focused container to workspace
-bindsym $mod+Shift+1 move container to workspace $ws1
-bindsym $mod+Shift+2 move container to workspace $ws2
-bindsym $mod+Shift+3 move container to workspace $ws3
-bindsym $mod+Shift+4 move container to workspace $ws4
-bindsym $mod+Shift+5 move container to workspace $ws5
-bindsym $mod+Shift+6 move container to workspace $ws6
-bindsym $mod+Shift+7 move container to workspace $ws7
-bindsym $mod+Shift+8 move container to workspace $ws8
-bindsym $mod+Shift+9 move container to workspace $ws9
-bindsym $mod+Shift+0 move container to workspace $ws10
-
-# Bindings for MS Natural Ergonomic Keyboard 4000
-bindsym XF86Launch5 workspace $ws1
-bindsym XF86Launch6 workspace $ws2
-bindsym XF86Launch7 workspace $ws3
-bindsym XF86Launch8 workspace $ws4
-bindsym XF86Launch9 workspace $ws5
-
-workspace $ws1 output DVI-D-1
-workspace $ws2 output DP-2
-workspace $ws10 output DVI-D-1
-
-# reload the configuration file
-bindsym $mod+Shift+r reload
-
-# exit sway (logs you out of your X session)
-bindsym $mod+Shift+e exec swaynag -t warning -m 'You pressed the exit shortcut. Do you really want to exit sway? This will end your Wayland session.' -b 'Yes, exit sway' 'swaymsg exit'
-
-# lock session
-bindsym $mod+i exec "swaylock -c 000000 -e"
-
-# Quickly edit dotfiles
-bindsym $mod+x exec "code ~/dotfiles"
-
-# Media control
-bindsym XF86AudioPlay exec playerctl play-pause
-bindsym XF86AudioPause exec playerctl play-pause
-bindsym XF86AudioNext exec playerctl next
-bindsym XF86AudioPrev exec playerctl previous
-
-bindsym XF86AudioRaiseVolume exec pactl set-sink-volume 0 +5% #increase sound volume
-bindsym XF86AudioLowerVolume exec pactl set-sink-volume 0 -5% #decrease sound volume
-bindsym XF86AudioMute exec pactl set-sink-mute 0 toggle # mute sound
-
+# Misc settings
 focus_follows_mouse no
 mouse_warping none
+workspace_auto_back_and_forth no
 
-# resize window (you can also use the mouse for that)
-mode "resize" {
-        # These bindings trigger as soon as you enter the resize mode
+# Colors, gaps
+include ./visuals
 
-        # same bindings, but for the arrow keys
-        bindsym Left resize shrink width 5 px or 5 ppt
-        bindsym Down resize grow height 5 px or 5 ppt
-        bindsym Up resize shrink height 5 px or 5 ppt
-        bindsym Right resize grow width 5 px or 5 ppt
-
-        bindsym Shift+Left resize shrink width 10 px or 10 ppt
-        bindsym Shift+Down resize grow height 10 px or 10 ppt
-        bindsym Shift+Up resize shrink height 10 px or 10 ppt
-        bindsym Shift+Right resize grow width 10 px or 10 ppt
-
-        bindsym $mod+Left resize shrink width 2 px or 2 ppt
-        bindsym $mod+Down resize grow height 2 px or 2 ppt
-        bindsym $mod+Up resize shrink height 2 px or 2 ppt
-        bindsym $mod+Right resize grow width 2 px or 2 ppt
-
-        # back to normal: Enter or Escape or $mod+r
-        bindsym Return mode "default"
-        bindsym Escape mode "default"
-        bindsym $mod+r mode "default"
-}
-
-# class                 border          backgr.         text            indicator       child_border
-client.focused          #656B91         #656B91         $foreground     #B2BAFF         #656B91
-client.focused_inactive #131A30         #131A30         $foreground     #131A30         #131A30
-client.unfocused        #131A30         #131A30         $foreground     #131A30         #131A30
-client.urgent           $background     $background     $foreground     $background     $background
-client.placeholder      $background     $background     $foreground     $background     $background
-
-client.background       $background
-
-bindsym $mod+r mode "resize"
-
-# Set borders and gaps
-default_border pixel 3
-
-gaps inner 10
-gaps outer 0
-
-# Add hotkeys for resizing gaps, one day I'd like to add a real mode to do so
-bindsym $mod+y exec swaymsg gaps inner all set 0
-bindsym $mod+t exec swaymsg gaps inner all set 10
-
-# Set a few windows to float
-for_window [app_id="pavucontrol"] floating enable
-for_window [app_id="gnome-calculator"] floating enable
-
-# Move some window to specific workspaces
-for_window [class="discord"] move window to workspace $ws9
-for_window [class="Spotify"] move window to workspace $ws10
-
-assign [class="discord"] $ws9
-assign [class="Spotify"] $ws10
-
-bar {
-    swaybar_command waybar
-}
+# Programs tweaks
+include ./program_tweaks
 
 # Auto-start programs
 include ./autostart
 
+# Sway's configs
 include /etc/sway/config.d/*

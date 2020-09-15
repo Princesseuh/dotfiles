@@ -1,5 +1,13 @@
+bar {
+    swaybar_command waybar
+}
+
+exec swayidle -w \
+            timeout 600 'swaymsg "output * dpms off"' \
+            resume 'swaymsg "output * dpms on"'
+
 exec wal -R -n --vte
-exec /usr/lib/polkit-gnome/polkit-gnome-authentication-agent-1 &
+exec /usr/lib/polkit-gnome/polkit-gnome-authentication-agent-1
 exec autotiling
 
 exec spotify

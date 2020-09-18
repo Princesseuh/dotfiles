@@ -1,17 +1,20 @@
 # Font for window titles
-font pango: Fira Code Nerd Font 10
+font pango: Iosevka Slab 10
+
+# Import pywal colorscheme
+include $HOME/.cache/wal/colors-sway
 
 # class                 border          backgr.         text            indicator       child_border
-client.focused          #656B91         #656B91         $foreground     #B2BAFF         #656B91
-client.focused_inactive #131A30         #131A30         $foreground     #131A30         #131A30
-client.unfocused        #131A30         #131A30         $foreground     #131A30         #131A30
-client.urgent           $background     $background     $foreground     $background     $background
-client.placeholder      $background     $background     $foreground     $background     $background
+client.focused          $color3         $color3         #fcfcfc         $color7         $color3
+client.focused_inactive $color5         $color5         $foreground     $color6         $color5
+client.unfocused        $color5         $color5         $foreground     $color6         $color5
+client.urgent           $background     $background     #fcfcfc         $background     $background
+client.placeholder      $background     $background     #fcfcfc         $background     $background
 
 client.background       $background
 
 # Set borders and gaps
-default_border pixel 3
+default_border pixel 2
 
 gaps inner 10
 gaps outer 0

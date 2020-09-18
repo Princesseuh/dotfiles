@@ -1,20 +1,22 @@
+@import "/home/erika/.cache/wal/colors-waybar.css";
+
 * {
     border: none;
     border-radius: 0;
-    font-family: "Fira Code Nerd Font Mono";
+    font-family: "Fira Code Nerd Font";
     min-height: 0;
 }
 
 window#waybar {
-    background-color: rgba(12, 16, 30, 0.3);
-    color: #FAF6F6;
-    font-size: 13px;
+    background-color: transparent;
+    color: #fcfcfc; /* We don't use foreground here because it's too close to the main accent color and doesn't work well in a bar */
+    font-size: 14px;
 }
 
 #window {
     font-weight: bold;
-    font-family: "Ubuntu";
     margin-left: 20px;
+    font-family: "Iosevka Slab";
 }
 
 #workspaces button {
@@ -22,7 +24,7 @@ window#waybar {
     background: transparent;
     color: rgba(250, 246, 246, 0.25);
     border-bottom: 2px solid rgba(250, 246, 246, 0.25);
-    font-size: 22px;
+    font-size: 15px;
 }
 
 #workspaces button.visible {
@@ -48,18 +50,20 @@ window#waybar {
 }
 
 #clock, #custom-spotify, #custom-updates, #custom-recording, #tray, #mode {
+    font-family: "Iosevka Slab";
+    font-weight: 600;
     padding: 0 7px;
     margin: 0 2px;
 }
 
 #custom-updates {
-    color: rgb(171, 156, 224);
-    background-color: rgba(171, 156, 224, 0.1)
+    color: lighter(@color6);
+    background-color: alpha(@color5, 0.1);
 }
 
 #custom-updates.no-updates {
-    color: rgba(171, 156, 224, 0.3);
-    background-color: rgba(171, 156, 224, 0.1)
+    color: alpha(@color6, 0.3);
+    background-color: alpha(@color5, 0.1);
 }
 
 #custom-spotify {

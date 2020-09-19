@@ -1,17 +1,16 @@
 default-timeout=8000
 output=DVI-D-1
 
-font=Fira Code Nerd Font 10
+font=Iosevka Slab 11
 
 padding=12
 
-background-color=#0c101eed
+background-color=#0b0b0be6
 progress-color=#FAF6F6
 text-color=#FAF6F6
 
-border-color=#6B79CF
-border-size=4
-border-radius=1
+border-color=#90A268
+border-size=6
 
 width=385
 margin=10, 8, 5

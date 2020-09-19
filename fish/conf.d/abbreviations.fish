@@ -1,7 +1,7 @@
 if status --is-interactive
     abbr    --global        c               clear
 
-    # cd shortcuts when I don't feel like using z
+    # cd shortcuts
     abbr    --global        dots            cd $HOME/dotfiles
     abbr    --global        work            cd $HOME/work
 
@@ -18,4 +18,5 @@ if status --is-interactive
 
     # Misc
     abbr    --global        m               math
+    abbr    --global        eng             LC_ALL=C
 end

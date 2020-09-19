@@ -113,6 +113,7 @@ bindsym $mod+i exec "swaylock -c 000000 -e"
 
 # Quickly edit dotfiles
 bindsym $mod+x exec "code ~/dotfiles"
+bindsym $mod+Shift+x exec "xdg-open https://github.com/Princesseuh/dotfiles"
 
 # Media control
 bindsym XF86AudioPlay exec playerctl play-pause

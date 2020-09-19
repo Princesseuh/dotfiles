@@ -1,7 +1,7 @@
 #!/bin/sh
 
 class=$(playerctl metadata --player=spotify --format '{{lc(status)}}')
-icon="<span size='xx-large' rise='-2100'></span>"
+icon=""
 
 if [[ $class == "playing" ]] || [[ $class == "paused" ]]; then
   info=$(playerctl metadata --player=spotify --format '{{artist}} - {{title}}')

@@ -1,7 +1,7 @@
 {
     "layer": "top",
     "position": "top",
-    "height": 26,
+    "height": 28,
     "output": "DVI-D-1",
 
     // Choose the order of the modules
@@ -18,10 +18,10 @@
         "format": "{icon}",
         "format-icons": {
             "1:home": "",
-            "2:web": "",
+            "2:web": "",
             "3:code": "",
             "4:term": "",
-            "chat": "ﭮ",
+            "chat": "",
             "music": "",
             "urgent": "",
             "focused": "",

@@ -11,11 +11,11 @@
 - Shell: [Fish](https://fishshell.com/)
 - Launcher: [Rofi](https://github.com/davatorium/rofi/)
 
-*Notes*: This is a [Wayland](https://gitlab.freedesktop.org/wayland) setup. All the folder in the `_old` folders were softwares I used before switching.
+*Notes*: This is a [Wayland](https://gitlab.freedesktop.org/wayland) setup. Configs I used before switching to Wayland can be found in the [_old folder](./_old)
 
 ## Installing
 
-A relatively bare-bone script to automatically install the dotfiles (install packages and do symlinks) exist (`install.sh`) however, it makes the following assumptions:
+A relatively bare-bone script to automatically install the dotfiles (install packages and do symlinks) exist ([install.sh](./install.sh)) however, it makes the following assumptions:
 
 - You're using Arch Linux (internally use pacman to install packages)
 - You want to install all the files, you can't select specific features but you can choose not to do symlinks and do those manually
@@ -36,6 +36,6 @@ A [list](https://wiki.archlinux.org/index.php/Pacman/Tips_and_tricks#Install_pac
 
 ## Autostart
 
-Make sure to checkout the `autostart` file located in the `sway` folder and removing the entries you don't need.
+Make sure to checkout the [autostart](./sway/autostart) file located in the [sway](./sway) folder and removing the entries you don't need.
 
 Only the `wal` line is needed for the setup to work since this setup use [pywal](https://github.com/dylanaraps/pywal) to automatically generate a color scheme based on my wallpaper. All the config files are based on the color scheme generated so if you're using another wallpaper / no wallpaper, your setup might look a little funny

@@ -3,7 +3,6 @@
 * {
     border: none;
     border-radius: 0;
-    font-family: "Fira Code Nerd Font";
     min-height: 0;
 }
 
@@ -20,11 +19,12 @@ window#waybar {
 }
 
 #workspaces button {
-    padding: 0 13px;
+    padding: 4px 13px;
     background: transparent;
     color: rgba(250, 246, 246, 0.25);
     border-bottom: 2px solid rgba(250, 246, 246, 0.25);
     font-size: 15px;
+    font-family: 'Font Awesome 5 Free Regular', 'Font Awesome 5 Free Solid', 'Font Awesome 5 Brands Regular';
 }
 
 #workspaces button.visible {

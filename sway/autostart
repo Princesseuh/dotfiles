@@ -17,4 +17,4 @@ exec caprine
 exec "sh -c 'sleep 5; exec keepassxc'"
 
 # We wait for internet to be ready before launching Discord because otherwise it'll get stuck in a multiple seconds timeout
-exec "sh -c 'wait_for_internet && exec discord'"
+exec "sh -c 'wait_for_internet 30 && exec discord'"

@@ -7,7 +7,7 @@ bindsym $mod+Return exec $term
 bindsym $mod+Shift+q kill
 
 # Start rofi
-bindsym $mod+d exec rofi -show drun
+bindsym $mod+d exec rofi -show drun -monitor 1
 
 # Capture screen
 bindsym $mod+p exec grimshot --notify copy area

@@ -1,3 +1,6 @@
+# Set a different title for XWayland windows
+for_window [shell="xwayland"] title_format "%title [XWayland]"
+
 # Set a few windows to float
 for_window [app_id="pavucontrol"] floating enable
 for_window [app_id="gnome-calculator"] floating enable

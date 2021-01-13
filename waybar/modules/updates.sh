@@ -7,7 +7,7 @@ no_internet_icon=""
 _c=1
 while ! ping -c 1 -W 1 1.1.1.1 -q > /dev/null; do
     text="$no_internet_icon Inget internet"
-    ((_c++)) && ((_c==15)) && echo -e "{\"text\":\""$text"\", \"class\":\"no-updates\"}" && exit
+    ((_c++)) && ((_c==30)) && echo -e "{\"text\":\""$text"\", \"class\":\"no-updates\"}" && exit
 
     sleep 1
 done

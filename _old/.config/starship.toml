@@ -15,6 +15,4 @@ disabled = true
 disabled = true
 
 [character]
-error_symbol = "✗"
-use_symbol_for_status = true
-style_failure = "#A84055"
+error_symbol = "[✗](#A84055)"

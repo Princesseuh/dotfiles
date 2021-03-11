@@ -6,15 +6,19 @@ exec swayidle -w \
             timeout 600 'swaymsg "output * dpms off"' \
             resume 'swaymsg "output * dpms on"'
 
+# Launch our terminal server for faster startups
+exec foot --server
+
 exec wal -R -n --vte
 exec /usr/lib/polkit-gnome/polkit-gnome-authentication-agent-1
 exec autotiling
 
-exec spotify
-exec caprine
+## Personal Programs
+    exec spotify
+    exec caprine
 
-# We need to delay Keepassxc's launch otherwise it won't minimize properly on launch
-exec "sh -c 'sleep 5; exec keepassxc'"
+    # We need to delay Keepassxc's launch otherwise it won't minimize properly on launch
+    exec "sh -c 'sleep 5; exec keepassxc'"
 
-# We wait for internet to be ready before launching Discord because otherwise it'll get stuck in a multiple seconds timeout
-exec "sh -c 'wait_for_internet 30 && exec discord'"
+    # We wait for internet to be ready before launching Discord because otherwise it'll get stuck in a multiple seconds timeout
+    exec "sh -c 'wait_for_internet 30 && exec discord'"

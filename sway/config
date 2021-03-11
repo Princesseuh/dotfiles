@@ -32,8 +32,8 @@ include ./outputs
 ### Input configuration
 
     input * {
-        xkb_layout ca
-        xkb_variant fr
+        xkb_layout caswe
+        xkb_variant swe
         xkb_options caps:escape
     }
 

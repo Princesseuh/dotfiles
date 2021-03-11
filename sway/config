@@ -12,7 +12,7 @@ include "$HOME/.cache/wal/colors-sway"
         set $right l
 
     # Terminal
-        set $term alacritty
+        set $term footclient
 
     # Workspaces
         set $ws1 "1:home"

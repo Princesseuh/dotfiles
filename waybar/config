@@ -55,7 +55,7 @@
         "interval": 3600,
         "return-type": "json",
         "exec": "~/.config/waybar/modules/updates.sh",
-        "on-click": "alacritty -e fish -i -c 'yay;pkill -RTMIN+8 waybar;read -n 1 -s -r'",
+        "on-click": "foot fish -i -c 'yay;pkill -RTMIN+8 waybar;read -n 1 -s -r'",
         "signal": 8
     },
     "custom/recording": {

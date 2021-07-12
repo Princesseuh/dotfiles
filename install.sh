@@ -42,7 +42,7 @@ then
     echo "===== Symlinking dirs ====="
     echo "==========================="
 
-    dirs=("sway" "alacritty" "bat" "rofi" "fish" "waybar" "mako" "htop" "pacman")
+    dirs=("sway" "alacritty" "bat" "rofi" "fish" "waybar" "mako" "htop" "pacman" "foot")
 
     for i in "${dirs[@]}"
     do

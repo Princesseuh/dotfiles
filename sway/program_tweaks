@@ -4,6 +4,7 @@ for_window [shell="xwayland"] title_format "%title [XWayland]"
 # Set a few windows to float
 for_window [app_id="pavucontrol"] floating enable
 for_window [app_id="gnome-calculator"] floating enable
+for_window [app_id="org.kde.kdialog"] floating enable
 
 # Move some window to specific workspaces
 for_window [class="discord"] move window to workspace $ws9
@@ -11,4 +12,5 @@ for_window [class="Spotify"] move window to workspace $ws10
 
 # Assign some window to specific workspaces
 assign [class="discord"] $ws9
+assign [app_id="discord"] $ws9
 assign [class="Spotify"] $ws10

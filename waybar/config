@@ -59,9 +59,12 @@
         "signal": 8
     },
     "custom/recording": {
+        "format": {},
         "interval": "once",
-        "exec": "~/.config/waybar/modules/recording.sh",
-        "on-click": "fish -c 'record-screen'",
+        "exec": "echo ' Recording'",
+        "tooltip": "false",
+        "exec-if": "pgrep 'wf-recorder'",
+        "on-click": "exec wl-record",
         "signal": 9
     }
 }

@@ -16,8 +16,8 @@ bindsym Print exec grimshot --notify copy output
 bindsym Shift+Print exec grimshot --notify copy screen
 
 # Record screen
-bindsym $mod+o exec "fish -i -c 'record-screen zone'"
-bindsym $mod+Shift+o exec "fish -i -c 'record-screen window'"
+bindsym $mod+o exec wl-record -s
+bindsym $mod+Shift+o exec wl-record -w
 
 # Movement
 bindsym $mod+Left focus left
@@ -156,7 +156,3 @@ mode "resize" {
         bindsym Escape mode "default"
         bindsym $mod+r mode "default"
 }
-
-# Add hotkeys for resizing gaps, one day I'd like to add a real mode to do so
-bindsym $mod+y exec swaymsg gaps inner all set 0
-bindsym $mod+t exec swaymsg gaps inner all set 10

@@ -1,8 +1,9 @@
-# Start Sway at login
+# Start Sway at login if running from tty1
 if status is-login
-    if test -z "$DISPLAY" -a $XDG_VTNR = 1
-       	launch-sway
-    end
+  set TTY1 (tty)
+  if test -z "$DISPLAY"; and test $TTY1 = "/dev/tty1"
+    launch-sway
+  end
 end
 
 # Fish settings
@@ -19,7 +20,7 @@ set fish_pager_color_description 928181
 set fish_pager_color_completion d1b9b9
 set fish_pager_color_progress d1b9b9 --background='48425D'
 
-if status --is-interactive
+if status is-interactive
     cat ~/.cache/wal/sequences &
 
     # Load Fisher plugins

@@ -1,0 +1,28 @@
+#!/bin/sh
+# Adapted from https://gist.github.com/gingkapls/33f7567900a32ceed4b27f0eae1ffcd8
+# TODO: Port to Fish
+filename=$(date +%F_%T.mp4)
+
+if [ -z $(pgrep wf-recorder) ];
+	then notify-send "Recording Started"
+	if [ "$1" == "-s" ]
+		then wf-recorder -f $HOME/Videos/Recordings/$filename -g "$(slurp -c "#FFFFFF")" >/dev/null 2>&1 &
+			sleep 2
+			while [ ! -z $(pgrep -x slurp) ]; do wait; done
+			pkill -RTMIN+9 waybar
+	else if [ "$1" == "-w" ]
+		then wf-recorder -f $HOME/Videos/Recordings/$filename -g "$(swaymsg -t get_tree | jq -r '.. | select(.pid? and .visible?) | .rect | "\(.x),\(.y) \(.width)x\(.height)"' | slurp -c "#FFFFFF" )" >/dev/null 2>&1 &
+			 sleep 2
+			 while [ ! -z $(pgrep -x slurp) ]; do wait; done
+			 pkill -RTMIN+9 waybar
+	else
+		wf-recorder -f $HOME/Videos/Recordings/$filename >/dev/null 2>&1 &
+		pkill -RTMIN+9 waybar
+	fi
+	fi
+else
+	killall -s SIGINT wf-recorder
+	notify-send "Recording Complete"
+	while [ ! -z $(pgrep -x wf-recorder) ]; do wait; done
+	pkill -RTMIN+9 waybar
+fi

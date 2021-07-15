@@ -1,6 +1,6 @@
 ### Output configuration
 output DVI-D-1 bg $wallpaper fill pos 0 0 res 1920x1080@144hz max_render_time 1
-output DP-2 bg $wallpaper fill pos 1920 0 res 1920x1080@60hz
+output DP-1 bg $wallpaper fill pos 1920 0 res 1920x1080@60hz
 
 
 focus output DVI-D-1

@@ -28,6 +28,8 @@ if status is-interactive
         builtin source $file 2>/dev/null
     end
 
+    zoxide init fish | source
+
     # Load local config
     source $HOME/.config/fish/local.fish
 end

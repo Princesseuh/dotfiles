@@ -6,7 +6,13 @@ function add_abbreviations --description 'Add our abbreviations to Fish'
 
     # cd shortcuts
     abbr    --add         dots            cd $HOME/dotfiles
-    abbr    --add         work            cd $HOME/work
+
+    switch (uname)
+    case Linux
+        abbr    --add         work            cd $HOME/work
+    case Darwin
+        abbr    --add         work            cd $HOME/Projects
+    end
 
     # Git stuff
     abbr    --add         gs              git status

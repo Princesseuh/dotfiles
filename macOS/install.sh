@@ -4,7 +4,7 @@
 
 # List of packages to install
 
-packages=("fish" "zoxide" "hyperfine")
+packages=("fish" "zoxide" "hyperfine" "htop" "bat" "fzf")
 
 echo "Install packages? This will install the following packages and the Iosevka font using homebrew (y/n) "
 printf '%s\n' "${packages[@]}"

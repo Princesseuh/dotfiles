@@ -1,12 +1,13 @@
 # Misc
 .env
+.DS_Store
 
 # Fish
-fish/fish_variables
-fish/fishd.*
-local.fish
+shared/fish/fish_variables
+shared/fish/fishd.*
+shared/fish/local.fish
 
-#Fisher
-fish/functions/fisher.fish
-fish/completions/fisher.fish
-fish/fisher/
+# Fisher
+shared/fish/functions/fisher.fish
+shared/fish/completions/fisher.fish
+shared/fish/fisher/

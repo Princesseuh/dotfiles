@@ -1,5 +1,5 @@
-# Start Sway at login if running from tty1
-if status is-login
+# Start Sway at login if running from tty1 on Linux
+if status is-login && test (uname) = Linux
   set TTY1 (tty)
   if test -z "$DISPLAY"; and test $TTY1 = "/dev/tty1"
     launch-sway
@@ -21,7 +21,10 @@ set fish_pager_color_completion d1b9b9
 set fish_pager_color_progress d1b9b9 --background='48425D'
 
 if status is-interactive
-    cat ~/.cache/wal/sequences &
+  # We only load up the wal config on Linux
+    if test (uname) = Linux
+      cat ~/.cache/wal/sequences &
+    end
 
     # Load Fisher plugins
     for file in $fisher_path/conf.d/*.fish

@@ -25,30 +25,32 @@ echo
 
 if [[ $REPLY =~ ^[Yy]$ ]]
 then
-    echo "============================"
-    echo "===== Symlinking files ====="
-    echo "============================"
+    # echo "============================"
+    # echo "===== Symlinking files ====="
+    # echo "============================"
 
-    files=(".config/starship.toml")
+    # files=(".config/starship.toml")
 
-    for i in "${files[@]}"
-    do
-        rm -f ~/$i
-        echo ~/dotfiles/$i "==>" ~/$i
-        ln -sf ~/dotfiles/$i ~/$i
-    done
+    # for i in "${files[@]}"
+    # do
+    #     rm -f ~/$i
+    #     echo ~/dotfiles/$i "==>" ~/$i
+    #     ln -sf ~/dotfiles/$i ~/$i
+    # done
 
     echo -e "\n==========================="
     echo "===== Symlinking dirs ====="
     echo "==========================="
 
-    dirs=("sway" "alacritty" "bat" "rofi" "fish" "waybar" "mako" "htop" "pacman" "foot")
+    dirs=("linux/sway" "linux/foot" "shared/bat" "linux/rofi" "shared/fish" "linux/waybar" "linux/mako" "shared/htop" "linux/pacman")
 
     for i in "${dirs[@]}"
     do
-        rm -f ~/.config/$i
-        echo ~/dotfiles/$i "==>" ~/.config/$i
-        ln -sf ~/dotfiles/$i ~/.config/$i
+        clean=${i//'linux/'}
+        clean=${clean//'shared/'}
+        rm -f ~/.config/$clean
+        echo ~/dotfiles/$i "==>" ~/.config/$clean
+        ln -sf ~/dotfiles/$i ~/.config/$clean
     done
 fi
 
@@ -61,7 +63,8 @@ echo
 if [[ $REPLY =~ ^[Yy]$ ]]
 then
     chsh -s $(which fish)
-    fish -i -c "set -U fish_user_paths $HOME/dotfiles/scripts $fish_user_paths"
+    fish -i -c "set -U fish_user_paths $HOME/dotfiles/shared/scripts $fish_user_paths"
+    fish -i -c "set -U fish_user_paths $HOME/dotfiles/linux/scripts $fish_user_paths"
 fi
 
 # -=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-

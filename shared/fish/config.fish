@@ -1,7 +1,7 @@
 # Start Sway at login if running from tty1 on Linux
 if status is-login && test (uname) = Linux
   set TTY1 (tty)
-  if test -z "$DISPLAY"; and test $TTY1 = "/dev/tty1"
+  if test -z "$DISPLAY"; and test $TTY1 = /dev/tty1
     launch-sway
   end
 end
@@ -22,7 +22,7 @@ set fish_pager_color_progress d1b9b9 --background='48425D'
 
 if status is-interactive
   # We only load up the wal config on Linux
-  if test (uname) = Linux; and not test $VSCODE_INTEGRATED_TERMINAL
+  if test (uname) = Linux; and not test "$TERM_PROGRAM" = vscode
     cat ~/.cache/wal/sequences &
   end
 

@@ -22,17 +22,17 @@ set fish_pager_color_progress d1b9b9 --background='48425D'
 
 if status is-interactive
   # We only load up the wal config on Linux
-    if test (uname) = Linux
-      cat ~/.cache/wal/sequences &
-    end
+  if test (uname) = Linux; and not test $VSCODE_INTEGRATED_TERMINAL
+    cat ~/.cache/wal/sequences &
+  end
 
-    # Load Fisher plugins
-    for file in $fisher_path/conf.d/*.fish
-        builtin source $file 2>/dev/null
-    end
+  # Load Fisher plugins
+  for file in $fisher_path/conf.d/*.fish
+    builtin source $file 2>/dev/null
+  end
 
-    zoxide init fish | source
+  zoxide init fish | source
 
-    # Load local config
-    source $HOME/.config/fish/local.fish
+  # Load local config
+  source $HOME/.config/fish/local.fish
 end

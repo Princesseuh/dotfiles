@@ -33,6 +33,9 @@ if status is-interactive
 
   zoxide init fish | source
 
+	string match -q "$TERM_PROGRAM" "vscode"
+	and . (code --locate-shell-integration-path fish)
+
   # Load local config
   source $HOME/.config/fish/local.fish
 end

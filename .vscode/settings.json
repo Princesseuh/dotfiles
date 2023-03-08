@@ -1,6 +1,10 @@
 {
-    "files.associations": {
-        "**/waybar/config": "jsonc",
-        "**/sway/*": "i3"
-    }
+  "files.associations": {
+    "**/waybar/config": "jsonc",
+    "**/sway/*": "i3"
+  },
+  "[fish]": {
+    "editor.formatOnPaste": false,
+    "editor.formatOnSave": false
+  }
 }

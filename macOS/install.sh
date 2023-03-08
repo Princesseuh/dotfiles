@@ -32,7 +32,7 @@ then
     echo "===== Symlinking dirs ====="
     echo "==========================="
 
-    dirs=("shared/bat" "shared/fish" "shared/htop")
+    dirs=("shared/bat" "shared/fish" "shared/htop" "shared/alacritty")
 
     for i in "${dirs[@]}"
     do

@@ -24,6 +24,8 @@ function add_abbreviations --description 'Add our abbreviations to Fish'
     abbr    --add         gp              git push
     abbr    --add         gd              git diff
     abbr    --add         cg              "cd (git rev-parse --show-toplevel)"
+		abbr 		--add					gca							"gum_commit"
+		abbr 		--add					gcaa						"git add -A; and gum_commit"
 
     # Misc
     abbr    --add         m               math

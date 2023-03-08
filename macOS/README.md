@@ -16,4 +16,4 @@ A relatively bare-bone (and not always so reliable) script to automatically inst
 - You want to install all the files, you can't select specific features but you can however choose not to do symlinks and do those manually
 - Your dotfiles are located at `~/dotfiles` (only required for automatic symlinking)
 
-⚠️ **Important: When doing symlinking, the script will FORCE DELETE  (`rm -f`) files before doing the links. This might result in data loss if you're not careful. Beware!**
+⚠️ **Important: When doing symlinking, the script will FORCE DELETE (`rm -f`) files before doing the links. This might result in data loss if you're not careful. Beware!**

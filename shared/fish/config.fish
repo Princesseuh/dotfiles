@@ -36,6 +36,10 @@ if status is-interactive
 	string match -q "$TERM_PROGRAM" "vscode"
 	and . (code --locate-shell-integration-path fish)
 
+	if not test "$TERM_PROGRAM" = vscode
+		eval (zellij setup --generate-auto-start fish | string collect)
+	end
+
   # Load local config
   source $HOME/.config/fish/local.fish
 end

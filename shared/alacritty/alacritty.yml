@@ -1,0 +1,31 @@
+window:
+  option_as_alt: OnlyLeft
+  padding:
+    x: 10
+    y: 10
+font:
+  normal:
+    family: "Iosevka Fixed"
+  size: 14
+colors:
+  primary:
+    background: "#17161b"
+    foreground: "#ded7d0"
+  normal:
+    black: "#2f2c32"
+    red: "#ff7da3"
+    green: "#7ec49d"
+    yellow: "#f0ce59"
+    blue: "#ffac5c"
+    magenta: "#b898dd"
+    cyan: "#56c6d5"
+    white: "#ded7d0"
+  bright:
+    black: "#686069"
+    red: "#ff7da3"
+    green: "#7ec49d"
+    yellow: "#f0ce59"
+    blue: "#ffac5c"
+    magenta: "#b898dd"
+    cyan: "#56c6d5"
+    white: "#ded7d0"

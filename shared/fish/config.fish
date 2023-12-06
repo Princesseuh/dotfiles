@@ -19,6 +19,7 @@ set fish_color_search_match --background='605C73'
 set fish_pager_color_description 928181
 set fish_pager_color_completion d1b9b9
 set fish_pager_color_progress d1b9b9 --background='48425D'
+set fish_color_autosuggestion brblack
 
 if status is-interactive
   # We only load up the wal config on Linux
@@ -36,10 +37,15 @@ if status is-interactive
 	string match -q "$TERM_PROGRAM" "vscode"
 	and . (code --locate-shell-integration-path fish)
 
+	# Only load zellij if we're not in vscode
 	if not test "$TERM_PROGRAM" = vscode
 		eval (zellij setup --generate-auto-start fish | string collect)
 	end
 
+	source $HOME/.config/fish/abbr.fish
+
   # Load local config
   source $HOME/.config/fish/local.fish
 end
+
+# source /opt/homebrew/opt/asdf/libexec/asdf.fish

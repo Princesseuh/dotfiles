@@ -1,0 +1,33 @@
+background = 17161b
+foreground= ded7d0
+
+font-family = Iosevka Fixed
+font-size = 15
+
+window-padding-x = 10
+window-padding-y = 10
+
+# black
+palette = 0=#2f2c32
+palette = 8=#686069
+# red
+palette = 1=#ff7da3
+palette = 9=#ff7da3
+# green
+palette = 2=#7ec49d
+palette = 10=#7ec49d
+# yellow
+palette = 3=#f0ce59
+palette = 11=#f0ce59
+# blue
+palette = 4=#ffac5c
+palette = 12=#ffac5c
+# purple
+palette = 5=#b898dd
+palette = 13=#b898dd
+# aqua
+palette = 6=#56c6d5
+palette = 14=#56c6d5
+# white
+palette = 7=#ded7d0
+palette = 15=#ded7d0

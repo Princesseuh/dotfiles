@@ -1,5 +1,5 @@
 #!/bin/sh
-TYPE=$(gum choose "fix" "feat" "config" "docs" "style" "nit" "refactor" "test" "chore" "revert" "ci" "perf")
+TYPE=$(gum choose "fix" "feat" "chore" "docs" "nit" "refactor" "test" "revert" "ci" "perf" "style" "config")
 [ -z "$TYPE" ] && exit
 SCOPE=$(gum input --placeholder "scope")
 
@@ -8,7 +8,7 @@ test -n "$SCOPE" && SCOPE="($SCOPE)"
 
 # Pre-populate the input with the type(scope): so that the user may change it
 SUMMARY=$(gum input --value "$TYPE$SCOPE: " --placeholder "Summary of this change")
-DESCRIPTION=$(gum write --placeholder "Details of this change (CTRL+D to finish)")
+DESCRIPTION=$(gum write --placeholder "Details of this change (CTRL+C to finish)")
 
 test -n "$DESCRIPTION" && DESCRIPTION=" -m \"$DESCRIPTION\""
 

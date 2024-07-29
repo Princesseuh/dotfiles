@@ -11,11 +11,16 @@ case Darwin
 		abbr    --add         work            cd $HOME/Projects
 end
 
+# Softwares
+abbr 		--add         zell             zellij
+abbr    --add         m               math
+
 # Git stuff
 abbr    --add         gs              git status
 abbr    --add         ga              git add
 abbr    --add         ga.             git add .
 abbr    --add         gaa             git add -A
+abbr 		--add         gco             git checkout
 abbr    --add         gm              git commit -m
 abbr    --add         gca             git commit --amend
 abbr    --add         gp              git push
@@ -27,5 +32,4 @@ abbr 		--add					gpll						git pull
 abbr		--add					gset						"git add -A; and git commit -m 'chore: changeset'"
 
 # Misc
-abbr    --add         m               math
 abbr    --add         eng             LC_ALL=C

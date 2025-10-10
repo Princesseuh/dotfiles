@@ -37,12 +37,6 @@ if status is-interactive
 	string match -q "$TERM_PROGRAM" "vscode"
 	and . (code --locate-shell-integration-path fish)
 
-	# Only load zellij if we're not in vscode or zed
-	if not test "$TERM_PROGRAM" = vscode
-	and not test "$ZED_TERM" = true
-		eval (zellij setup --generate-auto-start fish | string collect)
-	end
-
 	source $HOME/.config/fish/abbr.fish
 
   # Load local config

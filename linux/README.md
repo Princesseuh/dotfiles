@@ -1,5 +1,8 @@
 # Linux dotfiles
 
+> [!NOTE]
+> I don't use Linux a whole lot anymore, so these dotfiles might be a bit out of date.
+
 ![Screenshot](screenshot.png)
 
 ## Configuration

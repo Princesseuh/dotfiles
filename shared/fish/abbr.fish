@@ -12,7 +12,6 @@ case Darwin
 end
 
 # Softwares
-abbr 		--add         zell             zellij
 abbr    --add         m               math
 
 # Git stuff

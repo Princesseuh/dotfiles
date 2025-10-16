@@ -22,6 +22,10 @@
 	"gutter": {
 		"min_line_number_digits": 3
 	},
+	"windows": {
+		"ui_font_size": 18,
+		"buffer_font_size": 16
+	},
 	"icon_theme": "Colored Zed Icons Theme Light",
 	"experimental.theme_overrides": {
 		"background": "#1e1e1e",

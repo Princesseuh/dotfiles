@@ -1,0 +1,100 @@
+include "output.kdl"
+include "input.kdl"
+
+prefer-no-csd
+
+// Include dms files, I always want to win over them, though.
+include "dms/colors.kdl"
+include "dms/alttab.kdl"
+
+environment {
+	XDG_SESSION_TYPE "wayland"
+  XDG_CURRENT_DESKTOP "niri"
+  QT_QPA_PLATFORM "wayland"
+  ELECTRON_OZONE_PLATFORM_HINT "auto"
+  QT_QPA_PLATFORMTHEME "gtk3"
+  QT_QPA_PLATFORMTHEME_QT6 "gtk3"
+
+  EDITOR "zeditor"
+  TERMINAL "footclient"
+}
+
+layout {
+    background-color "transparent"
+
+    always-center-single-column
+
+    preset-column-widths {
+        proportion 0.33333
+        proportion 0.5
+        proportion 0.66667
+    }
+
+    gaps 12
+
+    border {
+        width 1
+    }
+
+    focus-ring {
+        width 2
+    }
+
+    empty-workspace-above-first
+
+    tab-indicator {
+        place-within-column
+        corner-radius 6
+        position "right"
+        length total-proportion=0.25
+        gap -10
+        gaps-between-tabs 4
+    }
+
+}
+
+gestures {
+    hot-corners {
+    		off
+    }
+}
+
+overview {
+    workspace-shadow {
+        off
+    }
+}
+
+hotkey-overlay {
+    skip-at-startup
+}
+
+screenshot-path "~/Pictures/Screenshots/Screenshot from %Y-%m-%d %H-%M-%S.png"
+
+animations {
+    slowdown 0.1
+}
+
+// Override to disable super+tab
+recent-windows {
+    binds {
+        Alt+Tab         { next-window scope="output"; }
+        Alt+Shift+Tab   { previous-window scope="output"; }
+        Alt+grave       { next-window filter="app-id"; }
+        Alt+Shift+grave { previous-window filter="app-id"; }
+    }
+}
+
+debug {
+		// Discord tray icon is weird without this
+    honor-xdg-activation-with-invalid-serial
+}
+
+// DMS generates other files, but I don't like using them and don't want to be *too* dependent on DMS in the first place
+// include "dms/layout.kdl"
+// include "dms/binds.kdl"
+
+include "binds.kdl"
+include "rules.kdl"
+
+include "autostart.kdl"

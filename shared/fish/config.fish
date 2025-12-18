@@ -1,8 +1,6 @@
-# Start Sway at login if running from tty1 on Linux
-if status is-login && test (uname) = Linux
-  set TTY1 (tty)
-  if test -z "$DISPLAY"; and test $TTY1 = /dev/tty1
-    launch-sway
+if status is-login
+  if test -z "$WAYLAND_DISPLAY" -a "$XDG_VTNR" = 1
+    exec niri-session -l
   end
 end
 
@@ -22,11 +20,6 @@ set fish_pager_color_progress d1b9b9 --background='48425D'
 set fish_color_autosuggestion brblack
 
 if status is-interactive
-  # We only load up the wal config on Linux
-  if test (uname) = Linux; and not test "$TERM_PROGRAM" = vscode
-    cat ~/.cache/wal/sequences &
-  end
-
   # Load Fisher plugins
   for file in $fisher_path/conf.d/*.fish
     builtin source $file 2>/dev/null
@@ -42,5 +35,3 @@ if status is-interactive
   # Load local config
   source $HOME/.config/fish/local.fish
 end
-
-# source /opt/homebrew/opt/asdf/libexec/asdf.fish

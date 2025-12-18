@@ -1,0 +1,12 @@
+output "HDMI-A-1" {
+    mode "3840x2160@60.000"
+    scale 2
+}
+
+output "DP-3" {
+    mode "2560x1440@359.999"
+    scale 1.25
+
+    // This monitor supports VRR, but I don't quite like how flickery it is, it seems worse on Linux somehow.
+    // variable-refresh-rate
+}

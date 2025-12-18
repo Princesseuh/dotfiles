@@ -4,10 +4,11 @@
 		"default_profile": "write",
 		"default_model": {
 			"provider": "copilot_chat",
-			"model": "claude-sonnet-4"
+			"model": "claude-sonnet-4.5"
 		},
 		"model_parameters": []
 	},
+	"window_decorations": "server",
 	"features": {
 		"edit_prediction_provider": "copilot"
 	},
@@ -123,6 +124,14 @@
 		"hide_root": true,
 		"indent_size": 16
 	},
+	"languages": {
+		"JavaScript": {
+			"language_servers": ["...", "!typescript-language-server", "!vtsls"]
+		},
+		"TypeScript": {
+			"language_servers": ["...", "!typescript-language-server", "!vtsls"]
+		}
+	},
 	"outline_panel": {
 		"dock": "right"
 	},
@@ -157,7 +166,7 @@
 			"breadcrumbs": false
 		},
 		"env": {
-			"EDITOR": "zed --wait"
+			"EDITOR": "zeditor --wait"
 		}
 	},
 	"title_bar": {
@@ -204,7 +213,7 @@
 		"rust-analyzer": {
 			"initialization_options": {
 				"check": {
-					"command": "clippy" // rust-analyzer.check.command (default: "check")
+					"command": "clippy"
 				}
 			}
 		}

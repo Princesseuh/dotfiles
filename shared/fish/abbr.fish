@@ -3,13 +3,7 @@ abbr    --add         c               clear
 
 # cd shortcuts
 abbr    --add         dots            cd $HOME/dotfiles
-
-switch (uname)
-case Linux
-		abbr    --add         work            cd $HOME/work
-case Darwin
-		abbr    --add         work            cd $HOME/Projects
-end
+abbr    --add         work            cd $HOME/Projects
 
 # Softwares
 abbr    --add         m               math

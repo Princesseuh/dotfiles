@@ -1,0 +1,60 @@
+
+layer-rule {
+    match namespace="^quickshell$"
+    place-within-backdrop true
+}
+
+window-rule {
+    geometry-corner-radius 6
+    clip-to-geometry true
+    tiled-state true
+    draw-border-with-background false
+}
+
+window-rule {
+    match app-id=r#"^org\.gnome\."#
+    draw-border-with-background false
+    geometry-corner-radius 12
+    clip-to-geometry true
+}
+
+window-rule {
+    match app-id=r#"^gnome-control-center$"#
+    match app-id=r#"^pavucontrol$"#
+    match app-id=r#"^nm-connection-editor$"#
+    default-column-width { proportion 0.5; }
+    open-floating false
+}
+
+window-rule {
+    match app-id=r#"^gnome-calculator$"#
+    match app-id=r#"^galculator$"#
+    match app-id=r#"^blueman-manager$"#
+    match app-id=r#"^org\.gnome\.Nautilus$"#
+    match app-id=r#"^steam$"#
+    match app-id=r#"^xdg-desktop-portal$"#
+    open-floating true
+}
+
+window-rule {
+	match app-id="footclient"
+	default-column-width { proportion 0.33333; }
+}
+
+window-rule {
+	open-maximized true
+  match app-id="vivaldi-stable"
+  // This doesn't actually work, unfortunately, not sure why, Zed always opens 0.5
+  match app-id="dev.zed.Zed"
+}
+
+
+window-rule {
+    match app-id="steam" title=r#"^notificationtoasts_\d+_desktop$"#
+    default-floating-position x=0 y=0 relative-to="bottom-right"
+}
+
+window-rule {
+    match app-id=r#"org.quickshell$"#
+    open-floating true
+}

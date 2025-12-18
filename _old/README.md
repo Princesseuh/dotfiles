@@ -4,9 +4,6 @@ These config files are for softwares I don't use actively anymore (but could reu
 
 Those are mostly Linux things but certain softwares could be used on Windows/macOS so I don't split this folder
 
-#### Linux stuff
-`i3` became `sway`
+#### Previous config screenshots
 
-`polybar` became `waybar`
-
-`dunst` became `mako`
+![Screenshot](screenshot.png)

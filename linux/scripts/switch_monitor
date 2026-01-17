@@ -1,0 +1,154 @@
+#!/bin/bash
+
+# Monitor configurations
+MON1=1
+MON1_INPUT1=0x11
+MON1_INPUT2=0x1b
+
+MON2=2
+MON2_INPUT1=0x0f
+MON2_INPUT2=0x05
+
+# Function to get current input
+get_current_input() {
+    local mon=$1
+    ddcutil --display $mon getvcp 60 | grep -oP 'sl=\K0x[0-9A-Fa-f]+' | tr '[:upper:]' '[:lower:]'
+}
+
+# Function to switch monitor input
+switch_monitor() {
+    local mon=$1
+    local input1=$2
+    local input2=$3
+
+    local current=$(get_current_input $mon)
+    echo "Monitor $mon current input: $current"
+
+    local next
+    if [ "$current" = "$input1" ]; then
+        next=$input2
+    else
+        next=$input1
+    fi
+
+    echo "Monitor $mon switching to: $next"
+    ddcutil --display $mon setvcp 60 $next
+}
+
+# Function to set specific input
+set_input() {
+    local mon=$1
+    local input=$2
+
+    local current=$(get_current_input $mon)
+    if [ "$current" = "$input" ]; then
+        echo "Monitor $mon already at $input, skipping"
+        return
+    fi
+
+    echo "Monitor $mon setting to: $input"
+    ddcutil --display $mon setvcp 60 $input
+}
+
+# Parse arguments
+case "$1" in
+    "monitor1"|"1")
+        switch_monitor $MON1 $MON1_INPUT1 $MON1_INPUT2
+        ;;
+    "monitor2"|"2")
+        switch_monitor $MON2 $MON2_INPUT1 $MON2_INPUT2
+        ;;
+    "sync-both"|"sync")
+        # Get current input of monitor1 and set both monitors to match it
+        current=$(get_current_input $MON1)
+        echo "Monitor 1 current input detected as: $current"
+
+        if [ "$current" = "$MON1_INPUT1" ]; then
+            echo "Syncing both monitors to input1"
+            set_input $MON2 $MON2_INPUT1
+        else
+            echo "Syncing both monitors to input2"
+            set_input $MON2 $MON2_INPUT2
+        fi
+        ;;
+    "set-both")
+        if [ -z "$2" ]; then
+            echo "Usage: $0 set-both <1|2>"
+            echo "  1 = input1"
+            echo "  2 = input2"
+            exit 1
+        fi
+        case "$2" in
+            "1")
+                echo "Setting both monitors to input1"
+                set_input $MON1 $MON1_INPUT1 &
+                set_input $MON2 $MON2_INPUT1 &
+                wait
+                ;;
+            "2")
+                echo "Setting both monitors to input2"
+                set_input $MON1 $MON1_INPUT2 &
+                set_input $MON2 $MON2_INPUT2 &
+                wait
+                ;;
+            *)
+                echo "Error: Input must be 1 or 2"
+                exit 1
+                ;;
+        esac
+        ;;
+    "set-monitor1")
+        if [ -z "$2" ]; then
+            echo "Usage: $0 set-monitor1 <1|2>"
+            echo "  1 = input1 ($MON1_INPUT1)"
+            echo "  2 = input2 ($MON1_INPUT2)"
+            exit 1
+        fi
+        case "$2" in
+            "1")
+                set_input $MON1 $MON1_INPUT1
+                ;;
+            "2")
+                set_input $MON1 $MON1_INPUT2
+                ;;
+            *)
+                echo "Error: Input must be 1 or 2"
+                exit 1
+                ;;
+        esac
+        ;;
+    "set-monitor2")
+        if [ -z "$2" ]; then
+            echo "Usage: $0 set-monitor2 <1|2>"
+            echo "  1 = input1 ($MON2_INPUT1)"
+            echo "  2 = input2 ($MON2_INPUT2)"
+            exit 1
+        fi
+        case "$2" in
+            "1")
+                set_input $MON2 $MON2_INPUT1
+                ;;
+            "2")
+                set_input $MON2 $MON2_INPUT2
+                ;;
+            *)
+                echo "Error: Input must be 1 or 2"
+                exit 1
+                ;;
+        esac
+        ;;
+    *)
+        echo "Usage: $0 <command>"
+        echo "Commands:"
+        echo "  monitor1|1        - Toggle monitor1 input"
+        echo "  monitor2|2        - Toggle monitor2 input"
+        echo "  sync-both|sync    - Sync both monitors to monitor1's current input"
+        echo "  set-both <1|2>    - Set both monitors to specific input (1=input1, 2=input2)"
+        echo "  set-monitor1 <1|2> - Set monitor1 to specific input (1=input1, 2=input2)"
+        echo "  set-monitor2 <1|2> - Set monitor2 to specific input (1=input1, 2=input2)"
+        echo ""
+        echo "Monitor1 inputs: 1=$MON1_INPUT1, 2=$MON1_INPUT2"
+        echo "Monitor2 inputs: 1=$MON2_INPUT1, 2=$MON2_INPUT2"
+        exit 1
+        ;;
+esac

@@ -12,3 +12,6 @@ shared/fish/functions/fisher.fish
 shared/fish/completions/fisher.fish
 shared/fish/fisher/
 shared/fish/completions/bun.fish
+
+# DMS things
+linux/DankMaterialShell/plugins

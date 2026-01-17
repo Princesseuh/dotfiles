@@ -27,27 +27,31 @@ window-rule {
 }
 
 window-rule {
-    match app-id=r#"^gnome-calculator$"#
-    match app-id=r#"^galculator$"#
-    match app-id=r#"^blueman-manager$"#
-    match app-id=r#"^org\.gnome\.Nautilus$"#
-    match app-id=r#"^steam$"#
-    match app-id=r#"^xdg-desktop-portal$"#
-    open-floating true
-}
-
-window-rule {
 	match app-id="footclient"
 	default-column-width { proportion 0.33333; }
 }
 
 window-rule {
-	open-maximized true
   match app-id="vivaldi-stable"
+  match app-id="code"
+
   // This doesn't actually work, unfortunately, not sure why, Zed always opens 0.5
   match app-id="dev.zed.Zed"
+
+  open-maximized true
 }
 
+window-rule {
+    match app-id="^steam_app_"
+    match app-id="cs2"
+    open-fullscreen true
+    open-on-output "DP-3"
+}
+
+window-rule {
+	match app-id="spotify"
+	open-maximized true
+}
 
 window-rule {
     match app-id="steam" title=r#"^notificationtoasts_\d+_desktop$"#

@@ -1,7 +1,7 @@
 spawn-sh-at-startup "wl-paste --watch cliphist store &"
 
 spawn-at-startup "spotify-launcher"
-spawn-at-startup "steam -silent"
+spawn-sh-at-startup "steam -silent"
 
 // For some reason Discord needs a delay or it won't start properly, weird but I won't question it
 spawn-sh-at-startup "sleep 3 && discord --start-minimized"

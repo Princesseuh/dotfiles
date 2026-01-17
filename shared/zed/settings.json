@@ -4,28 +4,28 @@
 		"default_profile": "write",
 		"default_model": {
 			"provider": "copilot_chat",
-			"model": "claude-sonnet-4.5"
+			"model": "claude-sonnet-4.5",
 		},
-		"model_parameters": []
+		"model_parameters": [],
 	},
 	"window_decorations": "server",
 	"features": {
-		"edit_prediction_provider": "copilot"
+		"edit_prediction_provider": "copilot",
 	},
 	"debugger": {
-		"dock": "right"
+		"dock": "right",
 	},
 	"notification_panel": {
-		"dock": "left"
+		"dock": "left",
 	},
 	"rounded_selection": false,
 	"theme": "Zoegi Dark",
 	"gutter": {
-		"min_line_number_digits": 3
+		"min_line_number_digits": 3,
 	},
 	"windows": {
 		"ui_font_size": 18,
-		"buffer_font_size": 16
+		"buffer_font_size": 16,
 	},
 	"icon_theme": "Colored Zed Icons Theme Light",
 	"experimental.theme_overrides": {
@@ -76,7 +76,7 @@
 			"function": { "color": "#8bc3c9" },
 			"identifier": { "color": "#8bc3c9" },
 			"attribute": {
-				"color": "#8bc3c9f"
+				"color": "#8bc3c9f",
 			},
 
 			"keyword": { "color": "#f0abcb" },
@@ -96,65 +96,78 @@
 			"comment": {
 				"color": "#808080",
 				"font_style": "normal",
-				"font_weight": null
+				"font_weight": null,
 			},
 			"comment.doc": {
 				"color": "#595959",
-				"font_style": "italic"
+				"font_style": "italic",
 			},
 			"variable": {
-				"color": "#e6e6e6"
-			}
-		}
+				"color": "#e6e6e6",
+			},
+		},
 	},
 	"indent_guides": {
-		"active_line_width": 2
+		"active_line_width": 2,
 	},
 	"git_panel": {
-		"dock": "right"
+		"dock": "right",
 	},
 	"git": {
 		"blame": {
-			"show_avatar": true
-		}
+			"show_avatar": true,
+		},
 	},
 	"project_panel": {
 		"dock": "right",
 		"entry_spacing": "standard",
 		"hide_root": true,
-		"indent_size": 16
+		"indent_size": 16,
 	},
 	"languages": {
-		"JavaScript": {
-			"language_servers": ["...", "!typescript-language-server", "!vtsls"]
-		},
 		"TypeScript": {
-			"language_servers": ["...", "!typescript-language-server", "!vtsls"]
-		}
+			"language_servers": [
+				"tsgo",
+				"!vtsls",
+				"!typescript-language-server",
+				"...",
+			],
+		},
+		"JavaScript": {
+			"language_servers": [
+				"tsgo",
+				"!vtsls",
+				"!typescript-language-server",
+				"...",
+			],
+		},
+		"Markdown": {
+			"show_edit_predictions": false,
+		},
 	},
 	"outline_panel": {
-		"dock": "right"
+		"dock": "right",
 	},
 	"inlay_hints": {
-		"enabled": true
+		"enabled": true,
 	},
 	"diagnostics": {
 		"inline": {
 			"enabled": true,
-			"max_severity": "error"
-		}
+			"max_severity": "error",
+		},
 	},
 	"search": {
-		"button": false
+		"button": false,
 	},
 	"tab_bar": {
 		"show": true,
 		"show_nav_history_buttons": false,
-		"show_tab_bar_buttons": true
+		"show_tab_bar_buttons": true,
 	},
 	"tabs": {
 		"file_icons": true,
-		"show_diagnostics": "all"
+		"show_diagnostics": "all",
 	},
 	"terminal": {
 		"font_size": 14.0,
@@ -163,26 +176,26 @@
 		"font_family": "Iosevka Term",
 		"line_height": "standard",
 		"toolbar": {
-			"breadcrumbs": false
+			"breadcrumbs": false,
 		},
 		"env": {
-			"EDITOR": "zeditor --wait"
-		}
+			"EDITOR": "zeditor --wait",
+		},
 	},
 	"title_bar": {
-		"show_user_picture": false
+		"show_user_picture": false,
 	},
 	"minimap": {
-		"show": "never"
+		"show": "never",
 	},
 	"file_finder": {
-		"modal_max_width": "medium"
+		"modal_max_width": "medium",
 	},
 	"hover_popover_delay": 150,
 	"autosave": {
 		"after_delay": {
-			"milliseconds": 5000
-		}
+			"milliseconds": 5000,
+		},
 	},
 	"buffer_font_weight": 500,
 	"unstable.ui_density": "compact",
@@ -194,28 +207,28 @@
 	"hard_tabs": true,
 	"tab_size": 2,
 	"scrollbar": {
-		"show": "auto"
+		"show": "auto",
 	},
 	"vertical_scroll_margin": 0,
 	"toolbar": {
 		"breadcrumbs": true,
-		"quick_actions": false
+		"quick_actions": false,
 	},
 	"active_pane_modifiers": {
 		"border_size": 0.4,
-		"inactive_opacity": 0.68
+		"inactive_opacity": 0.68,
 	},
 	"excerpt_context_lines": 7,
 	"collaboration_panel": {
-		"button": false
+		"button": false,
 	},
 	"lsp": {
 		"rust-analyzer": {
 			"initialization_options": {
 				"check": {
-					"command": "clippy"
-				}
-			}
-		}
-	}
+					"command": "clippy",
+				},
+			},
+		},
+	},
 }

@@ -117,8 +117,6 @@
   "appLauncherGridColumns": 4,
   "spotlightCloseNiriOverview": true,
   "niriOverviewOverlayEnabled": true,
-  "weatherLocation": "Göteborg, 411 10",
-  "weatherCoordinates": "57.7072326,11.9670171",
   "useAutoLocation": false,
   "weatherEnabled": true,
   "networkPreference": "auto",
@@ -456,5 +454,6 @@
       "maximizeDetection": true
     }
   ],
-  "configVersion": 2
+  "configVersion": 5,
+  "desktopWidgetInstances": []
 }

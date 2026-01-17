@@ -1,0 +1,12 @@
+{
+	"emojiLauncher": {
+		"enabled": true
+	},
+	"niriWindows": {
+		"enabled": true
+	},
+	"commandRunner": {
+		"enabled": true,
+		"terminal": "foot"
+	}
+}

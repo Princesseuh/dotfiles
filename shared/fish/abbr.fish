@@ -7,6 +7,9 @@ abbr    --add         work            cd $HOME/Projects
 
 # Softwares
 abbr    --add         m               math
+if test (uname) = Linux
+    abbr 		--add         htop            dgop
+end
 
 # Git stuff
 abbr    --add         gs              git status

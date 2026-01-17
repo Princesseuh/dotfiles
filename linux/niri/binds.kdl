@@ -4,7 +4,6 @@ binds {
     Mod+Shift+M { show-hotkey-overlay; }
 
     // === Application Launchers ===
-    Mod+T repeat=false hotkey-overlay-title="Open Terminal" { spawn "footclient"; }
     Mod+Return repeat=false hotkey-overlay-title="Open Terminal" { spawn "footclient"; }
     Mod+D repeat=false hotkey-overlay-title="Application Launcher" {
         spawn "dms" "ipc" "call" "spotlight" "toggle";
@@ -66,10 +65,10 @@ binds {
     Mod+L     { focus-column-right; }
 
     // === Window Movement ===
-    Mod+Shift+Left  { move-column-left; }
-    Mod+Shift+Down  { move-window-down; }
-    Mod+Shift+Up    { move-window-up; }
-    Mod+Shift+Right { move-column-right; }
+    Mod+Shift+Left  { move-column-left-or-to-monitor-left; }
+    Mod+Shift+Down  { move-window-down-or-to-workspace-down; }
+    Mod+Shift+Up    { move-window-up-or-to-workspace-up; }
+    Mod+Shift+Right { move-column-right-or-to-monitor-right; }
 
     Mod+Shift+H     { move-column-left; }
     Mod+Shift+J     { move-window-down; }
@@ -114,10 +113,10 @@ binds {
     // === Move Workspaces ===
     Mod+Shift+Page_Down { move-workspace-down; }
     Mod+Shift+Page_Up   { move-workspace-up; }
-    Mod+Shift+Y 			  {  move-workspace-to-monitor-previous; }
+    Mod+Shift+Y 			  { move-workspace-to-monitor-previous; }
     Mod+Shift+U         { move-workspace-down; }
     Mod+Shift+I         { move-workspace-up; }
-    Mod+Shift+O 			  {  move-workspace-to-monitor-next; }
+    Mod+Shift+O 			  { move-workspace-to-monitor-next; }
 
     // === Mouse Wheel Navigation ===
     Mod+WheelScrollDown      cooldown-ms=150 { focus-workspace-down; }
@@ -177,6 +176,14 @@ binds {
     Print { screenshot; }
     Ctrl+Print { screenshot-screen; }
     Alt+Print { screenshot-window; }
+
+    // === KVM at home ===
+    Mod+F1 { spawn "switch_monitor" "1"; }
+    Mod+F2 { spawn "switch_monitor" "2"; }
+    Mod+F3 { spawn "switch_monitor" "sync"; }
+    Mod+F4 { spawn "switch_monitor" "set-both" "1"; }
+    Mod+F5 { spawn "switch_monitor" "set-both" "2"; }
+
     // === System Controls ===
     Mod+Escape allow-inhibiting=false { toggle-keyboard-shortcuts-inhibit; }
     Mod+Shift+P { power-off-monitors; }

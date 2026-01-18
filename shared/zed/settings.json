@@ -1,20 +1,4 @@
 {
-	"ssh_connections": [
-		{
-			"host": "192.168.0.31",
-			"username": "emoreau",
-			"args": [],
-			"projects": [
-				{
-					"paths": ["/Users/emoreau/Projects/github/astro"],
-				},
-				{
-					"paths": ["/Users/emoreau/Projects"],
-				},
-			],
-			"nickname": "macOS",
-		},
-	],
 	"agent": {
 		"always_allow_tool_actions": true,
 		"default_profile": "write",

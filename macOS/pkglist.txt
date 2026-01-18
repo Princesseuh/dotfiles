@@ -1,0 +1,15 @@
+corepack
+fish
+fzf
+gh
+gnupg
+gum
+htop
+jackielii/tap/skhd-zig
+ni
+zoxide
+betterdisplay
+font-iosevka
+linearmouse
+meetingbar
+hyperfine

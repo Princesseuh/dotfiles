@@ -1,0 +1,319 @@
+#!/bin/bash
+
+# Detect OS
+if [[ "$OSTYPE" == "darwin"* ]]; then
+    OS="macos"
+else
+    OS="linux"
+fi
+
+# Monitor configurations
+if [ "$OS" = "macos" ]; then
+    # macOS - using betterdisplaycli with tagIDs
+    MON1=2
+    DELL_HDMI1=17
+    DELL_HDMI1_READ=6929 # No idea why but on macOS the Dell input value is weird
+    DELL_USBC=27
+    DELL_USBC_READ=6939
+
+    MON2=3
+    SAMSUNG_DP=15
+    SAMSUNG_DP_READ=15
+    SAMSUNG_HDMI1=5
+    SAMSUNG_HDMI1_READ=5
+else
+    # Linux - using ddcutil with display numbers
+    MON1=1
+    DELL_HDMI1=0x11
+    DELL_HDMI1_READ=0x11
+    DELL_USBC=0x1b
+    DELL_USBC_READ=0x1b
+
+    MON2=2
+    SAMSUNG_DP=0x0f
+    SAMSUNG_DP_READ=0x0f
+    SAMSUNG_HDMI1=0x05
+    SAMSUNG_HDMI1_READ=0x05
+
+    # Speed optimization flags for ddcutil, this is also needed for toggling split screen, for some reason
+    DDCUTIL_FLAGS="--sleep-multiplier 0.1 --noverify"
+fi
+
+# Function to get current input
+get_current_input() {
+    local mon=$1
+    if [ "$OS" = "macos" ]; then
+        betterdisplaycli get --tagID="$mon" --ddc --vcp=inputSelect 2>/dev/null | grep -oE '[0-9]+'
+    else
+        ddcutil $DDCUTIL_FLAGS --display $mon getvcp 60 | grep -oP 'sl=\K0x[0-9A-Fa-f]+' | tr '[:upper:]' '[:lower:]'
+    fi
+}
+
+get_split_screen_status() {
+    if [ "$OS" = "macos" ]; then
+        local value=$(betterdisplaycli get --tagID="$MON1" --ddc --vcp=E9 2>/dev/null | grep -oE '[0-9]+')
+        # Return true if split screen is enabled (non-zero value), false otherwise
+        if [ "$value" != "0" ] && [ -n "$value" ]; then
+            echo "true"
+        else
+            echo "false"
+        fi
+    else
+        local value=$(ddcutil getvcp E9 | grep -oP 'sl=\K0x[0-9A-Fa-f]+' | tr '[:upper:]' '[:lower:]')
+        # Return true if split screen is enabled (non-zero value), false otherwise
+        if [ "$value" != "0x00" ] && [ -n "$value" ]; then
+            echo "true"
+        else
+            echo "false"
+        fi
+    fi
+}
+
+toggle_split_screen() {
+    if [ "$(get_split_screen_status)" = "true" ]; then
+        echo "Disabling split screen"
+
+        # Check monitor2's current input and sync monitor1 accordingly
+        local mon2_current=$(get_current_input $MON2)
+        echo "Monitor 2 current input: $mon2_current"
+
+        if [ "$mon2_current" = "$SAMSUNG_DP_READ" ]; then
+            # Monitor2 is on input1, so set monitor1 to input2
+            echo "Monitor2 on input1 -> setting monitor1 to input2"
+            if [ "$OS" = "macos" ]; then
+                betterdisplaycli set --tagID="$MON1" --ddc --vcp=inputSelect --value="$DELL_USBC"
+            else
+                ddcutil $DDCUTIL_FLAGS --display $MON1 setvcp 60 $DELL_HDMI1
+            fi
+        elif [ "$mon2_current" = "$SAMSUNG_HDMI1_READ" ]; then
+            # Monitor2 is on input2, so set monitor1 to input1
+            echo "Monitor2 on input2 -> setting monitor1 to input1"
+            if [ "$OS" = "macos" ]; then
+                betterdisplaycli set --tagID="$MON1" --ddc --vcp=inputSelect --value="$DELL_HDMI1"
+            else
+                ddcutil $DDCUTIL_FLAGS --display $MON1 setvcp 60 $DELL_USBC
+            fi
+        fi
+
+        # Disable split screen after switching input
+        if [ "$OS" = "macos" ]; then
+            betterdisplaycli set --tagID="$MON1" --ddc --vcp=E9 --value=0
+        else
+            ddcutil $DDCUTIL_FLAGS --display $MON1 setvcp E9 0x00
+        fi
+    else
+        echo "Enabling split screen"
+
+        # Check monitor2's current input and sync monitor1 accordingly
+        local mon2_current=$(get_current_input $MON2)
+        echo "Monitor 2 current input: $mon2_current"
+
+        if [ "$mon2_current" = "$SAMSUNG_DP_READ" ]; then
+            # Monitor2 is on input1, so set monitor1 to input2 (before split screen inverses it)
+            echo "Monitor2 on input1 -> setting monitor1 to input2"
+            if [ "$OS" = "macos" ]; then
+                betterdisplaycli set --tagID="$MON1" --ddc --vcp=inputSelect --value="$DELL_USBC"
+            else
+                ddcutil $DDCUTIL_FLAGS --display $MON1 setvcp 60 $DELL_USBC
+            fi
+        elif [ "$mon2_current" = "$SAMSUNG_HDMI1_READ" ]; then
+            # Monitor2 is on input2, so set monitor1 to input1 (before split screen inverses it)
+            echo "Monitor2 on input2 -> setting monitor1 to input1"
+            if [ "$OS" = "macos" ]; then
+                betterdisplaycli set --tagID="$MON1" --ddc --vcp=inputSelect --value="$DELL_HDMI1"
+            else
+                ddcutil $DDCUTIL_FLAGS --display $MON1 setvcp 60 $DELL_HDMI1
+            fi
+        fi
+
+        # Enable split screen after setting the input
+        if [ "$OS" = "macos" ]; then
+            betterdisplaycli set --tagID="$MON1" --ddc --vcp=E9 --value=36
+        else
+            ddcutil $DDCUTIL_FLAGS --display $MON1 setvcp E9 0x24
+        fi
+    fi
+}
+
+# Function to switch monitor input
+switch_monitor() {
+    local mon=$1
+    local input1=$2
+    local input1_read=$3
+    local input2=$4
+    local input2_read=$5
+
+    # If split screen is enabled and this is monitor1, invert the inputs
+    if [ "$mon" = "$MON1" ] && [ "$(get_split_screen_status)" = "true" ]; then
+        local temp=$input1
+        local temp_read=$input1_read
+        input1=$input2
+        input1_read=$input2_read
+        input2=$temp
+        input2_read=$temp_read
+        echo "Split screen detected - inverting monitor1 inputs"
+    fi
+
+    local current=$(get_current_input $mon)
+    echo "Monitor $mon current input: $current"
+
+    local next
+    if [ "$current" = "$input1_read" ]; then
+        next=$input2
+    else
+        next=$input1
+    fi
+
+    echo "Monitor $mon switching to: $next"
+    if [ "$OS" = "macos" ]; then
+        betterdisplaycli set --tagID="$mon" --ddc --vcp=inputSelect --value="$next"
+    else
+        ddcutil $DDCUTIL_FLAGS --display $mon setvcp 60 $next
+    fi
+}
+
+# Function to set specific input
+set_input() {
+    local mon=$1
+    local input=$2
+    local input_read=$3
+
+    # If split screen is enabled and this is monitor1, invert the input mapping
+    if [ "$mon" = "$MON1" ] && [ "$(get_split_screen_status)" = "true" ]; then
+        echo "Split screen detected - inverting monitor1 input mapping"
+        if [ "$input" = "$DELL_HDMI1" ]; then
+            input=$DELL_USBC
+            input_read=$DELL_USBC_READ
+        elif [ "$input" = "$DELL_USBC" ]; then
+            input=$DELL_HDMI1
+            input_read=$DELL_HDMI1_READ
+        fi
+    fi
+
+    # Check if already at target input (optimization for macOS)
+    if [ "$OS" = "macos" ]; then
+        local current=$(get_current_input $mon)
+        if [ "$current" = "$input_read" ]; then
+            echo "Monitor $mon already at $input, skipping"
+            return
+        fi
+    fi
+
+    echo "Monitor $mon setting to: $input"
+    if [ "$OS" = "macos" ]; then
+        betterdisplaycli set --tagID="$mon" --ddc --vcp=inputSelect --value="$input"
+    else
+        ddcutil $DDCUTIL_FLAGS --display $mon setvcp 60 $input
+    fi
+}
+
+# Parse arguments
+case "$1" in
+    "monitor1"|"1")
+        switch_monitor $MON1 $DELL_HDMI1 $DELL_HDMI1_READ $DELL_USBC $DELL_USBC_READ
+        ;;
+    "monitor2"|"2")
+        switch_monitor $MON2 $SAMSUNG_DP $SAMSUNG_DP_READ $SAMSUNG_HDMI1 $SAMSUNG_HDMI1_READ
+        ;;
+    "sync-both"|"sync")
+        # Get current input of monitor1 and set both monitors to match it
+        current=$(get_current_input $MON1)
+        echo "Monitor 1 current input detected as: $current"
+
+        if [ "$current" = "$DELL_HDMI1_READ" ]; then
+            echo "Syncing both monitors to input1"
+            set_input $MON1 $DELL_HDMI1 $DELL_HDMI1_READ &
+            set_input $MON2 $SAMSUNG_DP $SAMSUNG_DP_READ &
+            wait
+        else
+            echo "Syncing both monitors to input2"
+            set_input $MON1 $DELL_USBC $DELL_USBC_READ &
+            set_input $MON2 $SAMSUNG_HDMI1 $SAMSUNG_HDMI1_READ &
+            wait
+        fi
+        ;;
+    "set-both")
+        if [ -z "$2" ]; then
+            echo "Usage: $0 set-both <1|2>"
+            echo "  1 = input1"
+            echo "  2 = input2"
+            exit 1
+        fi
+        case "$2" in
+            "1")
+                echo "Setting both monitors to input1"
+                set_input $MON1 $DELL_HDMI1 $DELL_HDMI1_READ &
+                set_input $MON2 $SAMSUNG_DP $SAMSUNG_DP_READ &
+                wait
+                ;;
+            "2")
+                echo "Setting both monitors to input2"
+                set_input $MON1 $DELL_USBC $DELL_USBC_READ &
+                set_input $MON2 $SAMSUNG_HDMI1 $SAMSUNG_HDMI1_READ &
+                wait
+                ;;
+            *)
+                echo "Error: Input must be 1 or 2"
+                exit 1
+                ;;
+        esac
+        ;;
+    "set-monitor1")
+        if [ -z "$2" ]; then
+            echo "Usage: $0 set-monitor1 <1|2>"
+            echo "  1 = input1 ($DELL_HDMI1)"
+            echo "  2 = input2 ($DELL_USBC)"
+            exit 1
+        fi
+        case "$2" in
+            "1")
+                set_input $MON1 $DELL_HDMI1 $DELL_HDMI1_READ
+                ;;
+            "2")
+                set_input $MON1 $DELL_USBC $DELL_USBC_READ
+                ;;
+            *)
+                echo "Error: Input must be 1 or 2"
+                exit 1
+                ;;
+        esac
+        ;;
+    "set-monitor2")
+        if [ -z "$2" ]; then
+            echo "Usage: $0 set-monitor2 <1|2>"
+            echo "  1 = input1 ($SAMSUNG_DP)"
+            echo "  2 = input2 ($SAMSUNG_HDMI1)"
+            exit 1
+        fi
+        case "$2" in
+            "1")
+                set_input $MON2 $SAMSUNG_DP $SAMSUNG_DP_READ
+                ;;
+            "2")
+                set_input $MON2 $SAMSUNG_HDMI1 $SAMSUNG_HDMI1_READ
+                ;;
+            *)
+                echo "Error: Input must be 1 or 2"
+                exit 1
+                ;;
+        esac
+        ;;
+    "toggle-splitscreen"|"split")
+        toggle_split_screen
+        ;;
+    *)
+        echo "Usage: $0 <command>"
+        echo "Commands:"
+        echo "  monitor1|1        - Toggle monitor1 input"
+        echo "  monitor2|2        - Toggle monitor2 input"
+        echo "  sync-both|sync    - Sync both monitors to monitor1's current input"
+        echo "  set-both <1|2>    - Set both monitors to specific input (1=input1, 2=input2)"
+        echo "  set-monitor1 <1|2> - Set monitor1 to specific input (1=input1, 2=input2)"
+        echo "  set-monitor2 <1|2> - Set monitor2 to specific input (1=input1, 2=input2)"
+        echo "  toggle-splitscreen|split - Toggle split screen mode on monitor1"
+        echo ""
+        echo "Monitor1 inputs: 1=$DELL_HDMI1, 2=$DELL_USBC"
+        echo "Monitor2 inputs: 1=$SAMSUNG_DP, 2=$SAMSUNG_HDMI1"
+        exit 1
+        ;;
+esac

@@ -3,6 +3,7 @@ cmd - f2 : switch_monitor 2
 cmd - f3 : switch_monitor sync
 cmd - f4 : switch_monitor set-both 1
 cmd - f5 : switch_monitor set-both 2
+cmd - f6 : switch_monitor toggle-splitscreen
 
 alt - 0x27 | alt + shift - 0x21
 alt - 0x2a | alt + shift - 0x1e

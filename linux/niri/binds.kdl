@@ -183,6 +183,7 @@ binds {
     Mod+F3 { spawn "switch_monitor" "sync"; }
     Mod+F4 { spawn "switch_monitor" "set-both" "1"; }
     Mod+F5 { spawn "switch_monitor" "set-both" "2"; }
+    Mod+F6 { spawn "switch_monitor" "toggle-splitscreen"; }
 
     // === System Controls ===
     Mod+Escape allow-inhibiting=false { toggle-keyboard-shortcuts-inhibit; }

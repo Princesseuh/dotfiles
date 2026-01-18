@@ -9,6 +9,7 @@ abbr    --add         work            cd $HOME/Projects
 abbr    --add         m               math
 if test (uname) = Linux
     abbr 		--add         htop            dgop
+    abbr		--add					zed							zeditor
 end
 
 # Git stuff

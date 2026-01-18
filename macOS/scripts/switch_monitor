@@ -1,94 +1,79 @@
 #!/bin/bash
 
 # Monitor configurations
-# Replace these UUIDs with your actual monitor UUIDs from BetterDisplay
-# You can find them by running: betterdisplaycli get -list
-MON1_UUID="REPLACE_WITH_MONITOR1_UUID"
-MON2_UUID="REPLACE_WITH_MONITOR2_UUID"
+MON1_TAGID=2
+MON1_INPUT1=17
+MON1_INPUT1_READ=6929
+MON1_INPUT2=27
+MON1_INPUT2_READ=6939
 
-# Input source IDs for each monitor
-# Common values: 0 = HDMI/DP input 1, 1 = HDMI/DP input 2, 15 = USB-C/DisplayPort
-MON1_INPUT1=0
-MON1_INPUT2=1
-
-MON2_INPUT1=0
-MON2_INPUT2=1
+MON2_TAGID=3
+MON2_INPUT1=15
+MON2_INPUT2=5
 
 # Function to get current input
 get_current_input() {
-    local mon_uuid=$1
-    # BetterDisplay CLI command to get current input
-    betterdisplaycli get -id="$mon_uuid" -input | grep -oE '[0-9]+'
+    local tagid=$1
+    betterdisplaycli get --tagID="$tagid" --ddc --vcp=inputSelect 2>/dev/null | grep -oE '[0-9]+'
 }
 
 # Function to switch monitor input
 switch_monitor() {
-    local mon_uuid=$1
+    local tagid=$1
     local input1=$2
-    local input2=$3
+    local input1_read=$3
+    local input2=$4
+    local input2_read=$5
 
-    local current=$(get_current_input "$mon_uuid")
-    echo "Monitor $mon_uuid current input: $current"
+    local current=$(get_current_input $tagid)
+    echo "Monitor $tagid current input: $current"
 
     local next
-    if [ "$current" = "$input1" ]; then
+    if [ "$current" = "$input1_read" ]; then
         next=$input2
     else
         next=$input1
     fi
 
-    echo "Monitor $mon_uuid switching to: $next"
-    betterdisplaycli set -id="$mon_uuid" -input="$next"
+    echo "Monitor $tagid switching to: $next"
+    betterdisplaycli set --tagID="$tagid" --ddc --vcp=inputSelect --value="$next"
 }
 
 # Function to set specific input
 set_input() {
-    local mon_uuid=$1
+    local tagid=$1
     local input=$2
+    local input_read=$3
 
-    local current=$(get_current_input "$mon_uuid")
-    if [ "$current" = "$input" ]; then
-        echo "Monitor $mon_uuid already at input $input, skipping"
+    local current=$(get_current_input $tagid)
+    if [ "$current" = "$input_read" ]; then
+        echo "Monitor $tagid already at $input, skipping"
         return
     fi
 
-    echo "Monitor $mon_uuid setting to: $input"
-    betterdisplaycli set -id="$mon_uuid" -input="$input"
+    echo "Monitor $tagid setting to: $input"
+    betterdisplaycli set --tagID="$tagid" --ddc --vcp=inputSelect --value="$input"
 }
-
-# Check if BetterDisplay CLI is installed
-if ! command -v betterdisplaycli &> /dev/null; then
-    echo "Error: betterdisplaycli not found. Please install BetterDisplay."
-    echo "Download from: https://github.com/waydabber/BetterDisplay"
-    exit 1
-fi
-
-# Check if monitor UUIDs are configured
-if [ "$MON1_UUID" = "REPLACE_WITH_MONITOR1_UUID" ] || [ "$MON2_UUID" = "REPLACE_WITH_MONITOR2_UUID" ]; then
-    echo "Error: Please configure monitor UUIDs in this script."
-    echo "Run 'betterdisplaycli get -list' to find your monitor UUIDs."
-    exit 1
-fi
 
 # Parse arguments
 case "$1" in
     "monitor1"|"1")
-        switch_monitor "$MON1_UUID" $MON1_INPUT1 $MON1_INPUT2
+        switch_monitor $MON1_TAGID $MON1_INPUT1 $MON1_INPUT1_READ $MON1_INPUT2 $MON1_INPUT2_READ
         ;;
     "monitor2"|"2")
-        switch_monitor "$MON2_UUID" $MON2_INPUT1 $MON2_INPUT2
+        switch_monitor $MON2_TAGID $MON2_INPUT1 $MON2_INPUT1 $MON2_INPUT2 $MON2_INPUT2
         ;;
     "sync-both"|"sync")
         # Get current input of monitor1 and set both monitors to match it
-        current=$(get_current_input "$MON1_UUID")
+        current=$(get_current_input $MON1_TAGID)
         echo "Monitor 1 current input detected as: $current"
 
-        if [ "$current" = "$MON1_INPUT1" ]; then
+        if [ "$current" = "$MON1_INPUT1_READ" ]; then
             echo "Syncing both monitors to input1"
-            set_input "$MON2_UUID" $MON2_INPUT1
+            set_input $MON2_TAGID $MON2_INPUT1 $MON2_INPUT1
         else
             echo "Syncing both monitors to input2"
-            set_input "$MON2_UUID" $MON2_INPUT2
+            set_input $MON2_TAGID $MON2_INPUT2 $MON2_INPUT2
         fi
         ;;
     "set-both")
@@ -101,14 +86,14 @@ case "$1" in
         case "$2" in
             "1")
                 echo "Setting both monitors to input1"
-                set_input "$MON1_UUID" $MON1_INPUT1 &
-                set_input "$MON2_UUID" $MON2_INPUT1 &
+                set_input $MON1_TAGID $MON1_INPUT1 $MON1_INPUT1_READ &
+                set_input $MON2_TAGID $MON2_INPUT1 $MON2_INPUT1 &
                 wait
                 ;;
             "2")
                 echo "Setting both monitors to input2"
-                set_input "$MON1_UUID" $MON1_INPUT2 &
-                set_input "$MON2_UUID" $MON2_INPUT2 &
+                set_input $MON1_TAGID $MON1_INPUT2 $MON1_INPUT2_READ &
+                set_input $MON2_TAGID $MON2_INPUT2 $MON2_INPUT2 &
                 wait
                 ;;
             *)
@@ -126,10 +111,10 @@ case "$1" in
         fi
         case "$2" in
             "1")
-                set_input "$MON1_UUID" $MON1_INPUT1
+                set_input $MON1_TAGID $MON1_INPUT1 $MON1_INPUT1_READ
                 ;;
             "2")
-                set_input "$MON1_UUID" $MON1_INPUT2
+                set_input $MON1_TAGID $MON1_INPUT2 $MON1_INPUT2_READ
                 ;;
             *)
                 echo "Error: Input must be 1 or 2"
@@ -146,20 +131,16 @@ case "$1" in
         fi
         case "$2" in
             "1")
-                set_input "$MON2_UUID" $MON2_INPUT1
+                set_input $MON2_TAGID $MON2_INPUT1 $MON2_INPUT1
                 ;;
             "2")
-                set_input "$MON2_UUID" $MON2_INPUT2
+                set_input $MON2_TAGID $MON2_INPUT2 $MON2_INPUT2
                 ;;
             *)
                 echo "Error: Input must be 1 or 2"
                 exit 1
                 ;;
         esac
-        ;;
-    "list")
-        echo "Listing available monitors:"
-        betterdisplaycli get -list
         ;;
     *)
         echo "Usage: $0 <command>"
@@ -170,7 +151,6 @@ case "$1" in
         echo "  set-both <1|2>    - Set both monitors to specific input (1=input1, 2=input2)"
         echo "  set-monitor1 <1|2> - Set monitor1 to specific input (1=input1, 2=input2)"
         echo "  set-monitor2 <1|2> - Set monitor2 to specific input (1=input1, 2=input2)"
-        echo "  list              - List available monitors and their UUIDs"
         echo ""
         echo "Monitor1 inputs: 1=$MON1_INPUT1, 2=$MON1_INPUT2"
         echo "Monitor2 inputs: 1=$MON2_INPUT1, 2=$MON2_INPUT2"

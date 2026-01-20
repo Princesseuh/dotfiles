@@ -10,13 +10,13 @@ fi
 # Monitor configurations
 if [ "$OS" = "macos" ]; then
     # macOS - using betterdisplaycli with displayIDs
-    MON1=2
+    MON1=3
     DELL_HDMI1=17
     DELL_HDMI1_READ=6929 # No idea why but on macOS the Dell input value is weird
     DELL_USBC=27
     DELL_USBC_READ=6939
 
-    MON2=3
+    MON2=2
     SAMSUNG_DP=15
     SAMSUNG_DP_READ=15
     SAMSUNG_HDMI1=5

@@ -3,13 +3,14 @@
 .DS_Store
 
 # Fish
-shared/fish/fish_variables
+shared/fish/fish_variables*
 shared/fish/fishd.*
 shared/fish/local.fish
 
 # Fisher
 shared/fish/functions/fisher.fish
 shared/fish/completions/fisher.fish
+shared/fish/completions/rstask.fish
 shared/fish/fisher/
 shared/fish/completions/bun.fish
 

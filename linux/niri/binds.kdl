@@ -121,11 +121,9 @@ binds {
     // === Mouse Wheel Navigation ===
     Mod+WheelScrollDown      cooldown-ms=150 { focus-workspace-down; }
     Mod+WheelScrollUp        cooldown-ms=150 { focus-workspace-up; }
-    Mod+Ctrl+WheelScrollDown cooldown-ms=150 { move-column-to-workspace-down; }
-    Mod+Ctrl+WheelScrollUp   cooldown-ms=150 { move-column-to-workspace-up; }
+    Mod+Shift+WheelScrollDown cooldown-ms=150 { move-column-to-workspace-down; }
+    Mod+Shift+WheelScrollUp   cooldown-ms=150 { move-column-to-workspace-up; }
 
-    Mod+Shift+WheelScrollDown      { focus-column-right; }
-    Mod+Shift+WheelScrollUp        { focus-column-left; }
     Mod+Ctrl+Shift+WheelScrollDown { move-column-right; }
     Mod+Ctrl+Shift+WheelScrollUp   { move-column-left; }
 
@@ -178,12 +176,12 @@ binds {
     Alt+Print { screenshot-window; }
 
     // === KVM at home ===
-    Mod+F1 { spawn "switch_monitor" "1"; }
-    Mod+F2 { spawn "switch_monitor" "2"; }
-    Mod+F3 { spawn "switch_monitor" "sync"; }
-    Mod+F4 { spawn "switch_monitor" "set-both" "1"; }
-    Mod+F5 { spawn "switch_monitor" "set-both" "2"; }
-    Mod+F6 { spawn "switch_monitor" "toggle-splitscreen"; }
+    Mod+F1 allow-when-locked=true repeat=false { spawn "switch_monitor" "1"; }
+    Mod+F2 allow-when-locked=true repeat=false { spawn "switch_monitor" "2"; }
+    Mod+F3 allow-when-locked=true repeat=false { spawn "switch_monitor" "sync"; }
+    Mod+F4 allow-when-locked=true repeat=false { spawn "switch_monitor" "set-both" "1"; }
+    Mod+F5 allow-when-locked=true repeat=false { spawn "switch_monitor" "set-both" "2"; }
+    Mod+F6 allow-when-locked=true repeat=false { spawn "switch_monitor" "toggle-splitscreen"; }
 
     // === System Controls ===
     Mod+Escape allow-inhibiting=false { toggle-keyboard-shortcuts-inhibit; }

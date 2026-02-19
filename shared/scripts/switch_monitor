@@ -10,6 +10,7 @@ fi
 # Monitor configurations
 if [ "$OS" = "macos" ]; then
     # macOS - using betterdisplaycli with displayIDs
+    # TODO: For some unknown reason, sometimes the Dell monitor's displayID changes, should probably use something else (UUID, name or something)
     MON1=3
     DELL_HDMI1=17
     DELL_HDMI1_READ=6929 # No idea why but on macOS the Dell input value is weird
@@ -127,9 +128,13 @@ toggle_split_screen() {
             fi
         fi
 
+        # Often a short delay is needed here to ensure the monitor processes the input change before enabling split screen,
+        # otherwise, the split screen command either will be completely ignored or the monitor will end up in a weird state.
+        # This is especially true on Linux where because of the resolution change the input change takes longer
+        sleep 1
+
         # Enable split screen after setting the input
         if [ "$OS" = "macos" ]; then
-        		sleep 1
             betterdisplaycli set --displayID=$MON1 --ddc --vcp=233 --value=36
         else
             ddcutil $DDCUTIL_FLAGS --display $MON1 setvcp E9 0x24

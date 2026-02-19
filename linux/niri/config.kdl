@@ -93,6 +93,7 @@ debug {
 // DMS generates other files, but I don't like using them and don't want to be *too* dependent on DMS in the first place
 // include "dms/layout.kdl"
 // include "dms/binds.kdl"
+// include "dms/outputs.kdl
 
 include "binds.kdl"
 include "rules.kdl"

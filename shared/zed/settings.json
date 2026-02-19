@@ -1,17 +1,25 @@
 {
+	"edit_predictions": {
+		"provider": "copilot",
+	},
 	"agent": {
 		"always_allow_tool_actions": true,
 		"default_profile": "write",
 		"default_model": {
 			"provider": "copilot_chat",
-			"model": "claude-sonnet-4.5",
+			"model": "claude-sonnet-4.6",
 		},
 		"model_parameters": [],
 	},
-	"window_decorations": "server",
-	"features": {
-		"edit_prediction_provider": "copilot",
+	"agent_servers": {
+		// Installing OpenCode from the registry does not work in remote servers for some reason since a recent update
+		"OpenCode": {
+			"type": "custom",
+			"command": "opencode",
+			"args": ["acp"],
+		},
 	},
+	"window_decorations": "server",
 	"debugger": {
 		"dock": "right",
 	},
@@ -111,6 +119,7 @@
 		"active_line_width": 2,
 	},
 	"git_panel": {
+		"tree_view": true,
 		"dock": "right",
 	},
 	"git": {
@@ -127,22 +136,19 @@
 	"languages": {
 		"TypeScript": {
 			"language_servers": [
-				"tsgo",
-				"!vtsls",
+				"!tsgo",
+				"vtsls",
 				"!typescript-language-server",
 				"...",
 			],
 		},
 		"JavaScript": {
 			"language_servers": [
-				"tsgo",
-				"!vtsls",
+				"!tsgo",
+				"vtsls",
 				"!typescript-language-server",
 				"...",
 			],
-		},
-		"Markdown": {
-			"show_edit_predictions": false,
 		},
 	},
 	"outline_panel": {

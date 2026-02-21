@@ -10,13 +10,13 @@ fi
 # Monitor configurations
 if [ "$OS" = "macos" ]; then
     # for some unknown reason, on macOS the ids changes all the time, so using those long uuids to hopefully fix that
-    MON1="9A6D8FBC-9979-4E56-A0F6-37E5DEE6B1C0" # DELL S2722QC
+    MON1="453FMD3" # DELL S2722QC
     DELL_HDMI1=17
     DELL_HDMI1_READ=6929 # No idea why but on macOS the Dell input value is weird
     DELL_USBC=27
     DELL_USBC_READ=6939
 
-    MON2="B78F7CFB-C587-4FAA-B1CF-53CF4631D23D" # Odyssey G60SD (Samsung)
+    MON2="HNBY200237" # Odyssey G60SD (Samsung)
     SAMSUNG_DP=15
     SAMSUNG_DP_READ=15
     SAMSUNG_HDMI1=5
@@ -43,7 +43,7 @@ fi
 get_current_input() {
     local mon=$1
     if [ "$OS" = "macos" ]; then
-        betterdisplaycli get --UUID=$mon --ddc --vcp=inputSelect 2>/dev/null | grep -oE '[0-9]+'
+        betterdisplaycli get --alphanumericSerial=$mon --ddc --vcp=inputSelect 2>/dev/null | grep -oE '[0-9]+'
     else
         ddcutil $DDCUTIL_FLAGS --display $mon getvcp 60 | grep -oP 'sl=\K0x[0-9A-Fa-f]+' | tr '[:upper:]' '[:lower:]'
     fi
@@ -51,7 +51,7 @@ get_current_input() {
 
 get_split_screen_status() {
     if [ "$OS" = "macos" ]; then
-        local value=$(betterdisplaycli get --UUID=$MON1 --ddc --vcp=233 2>/dev/null | grep -oE '[0-9]+')
+        local value=$(betterdisplaycli get --alphanumericSerial=$MON1 --ddc --vcp=233 2>/dev/null | grep -oE '[0-9]+')
         # Return true if split screen is enabled (non-zero value), false otherwise
         if [ "$value" != "0" ] && [ -n "$value" ]; then
             echo "true"
@@ -81,7 +81,7 @@ toggle_split_screen() {
             # Monitor2 is on input1, so set monitor1 to input2
             echo "Monitor2 on input1 -> setting monitor1 to input2"
             if [ "$OS" = "macos" ]; then
-                betterdisplaycli set --UUID=$MON1 --ddc --vcp=inputSelect --value="$DELL_HDMI1"
+                betterdisplaycli set --alphanumericSerial=$MON1 --ddc --vcp=inputSelect --value="$DELL_HDMI1"
             else
                 ddcutil $DDCUTIL_FLAGS --display $MON1 setvcp 60 $DELL_HDMI1
             fi
@@ -89,7 +89,7 @@ toggle_split_screen() {
             # Monitor2 is on input2, so set monitor1 to input1
             echo "Monitor2 on input2 -> setting monitor1 to input1"
             if [ "$OS" = "macos" ]; then
-                betterdisplaycli set --UUID=$MON1 --ddc --vcp=inputSelect --value="$DELL_USBC"
+                betterdisplaycli set --alphanumericSerial=$MON1 --ddc --vcp=inputSelect --value="$DELL_USBC"
             else
                 ddcutil $DDCUTIL_FLAGS --display $MON1 setvcp 60 $DELL_USBC
             fi
@@ -98,7 +98,7 @@ toggle_split_screen() {
         # Disable split screen after switching input
         if [ "$OS" = "macos" ]; then
       			sleep 1
-            betterdisplaycli set --UUID=$MON1 --ddc --vcp=233 --value=0
+            betterdisplaycli set --alphanumericSerial=$MON1 --ddc --vcp=233 --value=0
         else
             ddcutil $DDCUTIL_FLAGS --display $MON1 setvcp E9 0x00
         fi
@@ -113,7 +113,7 @@ toggle_split_screen() {
             # Monitor2 is on input1, so set monitor1 to input2 (before split screen inverses it)
             echo "Monitor2 on input1 -> setting monitor1 to input2"
             if [ "$OS" = "macos" ]; then
-                betterdisplaycli set --UUID=$MON1 --ddc --vcp=inputSelect --value="$DELL_USBC"
+                betterdisplaycli set --alphanumericSerial=$MON1 --ddc --vcp=inputSelect --value="$DELL_USBC"
             else
                 ddcutil $DDCUTIL_FLAGS --display $MON1 setvcp 60 $DELL_USBC
             fi
@@ -121,7 +121,7 @@ toggle_split_screen() {
             # Monitor2 is on input2, so set monitor1 to input1 (before split screen inverses it)
             echo "Monitor2 on input2 -> setting monitor1 to input1"
             if [ "$OS" = "macos" ]; then
-                betterdisplaycli set --UUID=$MON1 --ddc --vcp=inputSelect --value="$DELL_HDMI1"
+                betterdisplaycli set --alphanumericSerial=$MON1 --ddc --vcp=inputSelect --value="$DELL_HDMI1"
             else
                 ddcutil $DDCUTIL_FLAGS --display $MON1 setvcp 60 $DELL_HDMI1
             fi
@@ -134,7 +134,7 @@ toggle_split_screen() {
 
         # Enable split screen after setting the input
         if [ "$OS" = "macos" ]; then
-            betterdisplaycli set --UUID=$MON1 --ddc --vcp=233 --value=36
+            betterdisplaycli set --alphanumericSerial=$MON1 --ddc --vcp=233 --value=36
         else
             ddcutil $DDCUTIL_FLAGS --display $MON1 setvcp E9 0x24
         fi
@@ -172,7 +172,7 @@ switch_monitor() {
 
     echo "Monitor $mon switching to: $next"
     if [ "$OS" = "macos" ]; then
-        betterdisplaycli set --UUID=$mon --ddc --vcp=inputSelect --value="$next"
+        betterdisplaycli set --alphanumericSerial=$mon --ddc --vcp=inputSelect --value="$next"
     else
         ddcutil $DDCUTIL_FLAGS --display $mon setvcp 60 $next
     fi
@@ -207,7 +207,7 @@ set_input() {
 
     echo "Monitor $mon setting to: $input"
     if [ "$OS" = "macos" ]; then
-        betterdisplaycli set --UUID=$mon --ddc --vcp=inputSelect --value="$input"
+        betterdisplaycli set --alphanumericSerial=$mon --ddc --vcp=inputSelect --value="$input"
     else
         ddcutil $DDCUTIL_FLAGS --display $mon setvcp 60 $input
     fi

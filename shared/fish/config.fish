@@ -19,6 +19,8 @@ set fish_pager_color_completion d1b9b9
 set fish_pager_color_progress d1b9b9 --background='48425D'
 set fish_color_autosuggestion brblack
 
+set -x GPG_TTY (tty)
+
 if status is-interactive
   # Load Fisher plugins
   for file in $fisher_path/conf.d/*.fish

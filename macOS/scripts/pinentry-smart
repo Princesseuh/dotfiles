@@ -1,0 +1,7 @@
+#!/bin/sh
+# Use terminal pinentry when a TTY is available, otherwise fall back to GUI
+if tty > /dev/null 2>&1; then
+    exec /opt/homebrew/bin/pinentry-tty "$@"
+else
+    exec /opt/homebrew/bin/pinentry-mac "$@"
+fi

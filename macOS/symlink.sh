@@ -22,6 +22,17 @@ then
         echo ~/dotfiles/$i "==>" ~/.config/$clean
         ln -sf ~/dotfiles/$i ~/.config/$clean
     done
+
+    echo -e "\n==========================="
+    echo "===== Symlinking scripts ====="
+    echo "==========================="
+
+    mkdir -p ~/.local/bin
+    for f in ~/dotfiles/macOS/scripts/*; do
+        script=$(basename "$f")
+        echo ~/dotfiles/macOS/scripts/$script "==>" ~/.local/bin/$script
+        ln -sf ~/dotfiles/macOS/scripts/$script ~/.local/bin/$script
+    done
 fi
 
 # -=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-

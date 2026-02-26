@@ -1,6 +1,6 @@
 output "HDMI-A-1" {
     mode "3840x2160@60.000"
-    scale 2
+    scale 1.875
 }
 
 output "DP-3" {

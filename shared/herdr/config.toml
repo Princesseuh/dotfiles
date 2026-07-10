@@ -1,0 +1,10 @@
+onboarding = false
+[worktrees]
+directory = "~/worktrees"
+
+[ui]
+agent_panel_sort = "priority"
+
+show_agent_labels_on_pane_borders = true
+[ui.sound]
+enabled = false

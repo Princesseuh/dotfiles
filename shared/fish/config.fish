@@ -1,5 +1,5 @@
 if status is-login
-  if test -z "$WAYLAND_DISPLAY" -a "$XDG_VTNR" = 1
+  if test -z "$WAYLAND_DISPLAY" -a "$XDG_VTNR" = 1 -a -z "$SSH_CONNECTION"
     exec niri-session -l
   end
 end
@@ -36,4 +36,8 @@ if status is-interactive
 
   # Load local config
   source $HOME/.config/fish/local.fish
+
+  set -gx ANDROID_HOME /opt/android-sdk
+  set -gx ANDROID_NDK_HOME /opt/android-ndk
+  set -gx PATH $ANDROID_HOME/cmdline-tools/latest/bin $ANDROID_HOME/platform-tools $PATH
 end

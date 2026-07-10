@@ -30,7 +30,7 @@ linux-firmware
 linux-headers
 matugen
 nano
-neofetch
+fastfetch
 niri
 noto-fonts
 noto-fonts-cjk

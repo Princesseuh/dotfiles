@@ -1,0 +1,16 @@
+#!/bin/bash
+
+# Local interfaces
+for interface in $(ip -4 -o address show | awk '{print $2}' | sort -u); do
+    addr=$(ip -4 -o address show "$interface" | awk '{print $4}')
+    if [ -n "$addr" ]; then
+        printf "\033[34m%s:\033[0m\n  %s\n" "$interface" "$addr"
+    fi
+done
+
+# External IP
+printf "\033[34mEXTERNAL:\033[0m\n"
+ipv4=$(curl -4 -s https://ifconfig.co 2>/dev/null)
+ipv6=$(curl -6 -s https://ifconfig.co 2>/dev/null)
+[ -n "$ipv4" ] && printf "  %s\n" "$ipv4"
+[ -n "$ipv6" ] && printf "  %s\n" "$ipv6"

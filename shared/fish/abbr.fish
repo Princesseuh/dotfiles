@@ -23,9 +23,11 @@ abbr    --add         gca             git commit --amend
 abbr    --add         gp              git push
 abbr    --add         gd              git diff
 abbr    --add         cg              "cd (git rev-parse --show-toplevel)"
+abbr    --add         cgm             "cd (git worktree list --porcelain | string match -rg '^worktree (.*)')[1]"
 abbr 		--add					gca							"gum_commit"
 abbr 		--add					gcaa						"git add -A; and gum_commit"
 abbr 		--add					gpll						git pull
+abbr 		--add					gplr						git pull --rebase
 abbr		--add					gset						"git add -A; and git commit -m 'chore: changeset'"
 abbr 		--add 				gcom 						"git checkout (git rev-parse --abbrev-ref origin/HEAD | cut -c8-)"
 

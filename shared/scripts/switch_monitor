@@ -49,24 +49,61 @@ get_current_input() {
     fi
 }
 
-get_split_screen_status() {
+read_split_screen_value() {
     if [ "$OS" = "macos" ]; then
-        local value=$(betterdisplaycli get --alphanumericSerial=$MON1 --ddc --vcp=233 2>/dev/null | grep -oE '[0-9]+')
-        # Return true if split screen is enabled (non-zero value), false otherwise
-        if [ "$value" != "0" ] && [ -n "$value" ]; then
-            echo "true"
-        else
-            echo "false"
-        fi
+        betterdisplaycli get --alphanumericSerial=$MON1 --ddc --vcp=233 2>/dev/null | grep -oE '[0-9]+'
     else
-        local value=$(ddcutil getvcp E9 | grep -oP 'sl=\K0x[0-9A-Fa-f]+' | tr '[:upper:]' '[:lower:]')
-        # Return true if split screen is enabled (non-zero value), false otherwise
-        if [ "$value" != "0x00" ] && [ -n "$value" ]; then
-            echo "true"
-        else
-            echo "false"
-        fi
+        ddcutil $DDCUTIL_FLAGS --display $MON1 getvcp E9 | grep -oP 'sl=\K0x[0-9A-Fa-f]+' | tr '[:upper:]' '[:lower:]'
     fi
+}
+
+get_split_screen_status() {
+    local value=$(read_split_screen_value)
+    # Enabled is any non-zero value; an empty read (failed query) counts as disabled
+    if [ -n "$value" ] && [ "$value" != "0x00" ] && [ "$value" != "0" ]; then
+        echo "true"
+    else
+        echo "false"
+    fi
+}
+
+# Set split screen on monitor1 and confirm it took effect. The setvcp commands
+# use --noverify and get silently dropped while the monitor is still processing
+# the preceding input/resolution change, so re-send until a read back confirms.
+set_split_screen() {
+    local target=$1 # "on" or "off"
+    local linux_value macos_value
+    if [ "$target" = "on" ]; then
+        linux_value=0x24
+        macos_value=36
+    else
+        linux_value=0x00
+        macos_value=0
+    fi
+
+    local attempt
+    for attempt in 1 2 3 4 5; do
+        if [ "$OS" = "macos" ]; then
+            betterdisplaycli set --alphanumericSerial=$MON1 --ddc --vcp=233 --value=$macos_value
+        else
+            ddcutil $DDCUTIL_FLAGS --display $MON1 setvcp E9 $linux_value
+        fi
+
+        sleep 1
+
+        # An empty read means the query failed mid-transition: not confirmed, retry
+        local value=$(read_split_screen_value)
+        if [ "$target" = "off" ] && { [ "$value" = "0x00" ] || [ "$value" = "0" ]; }; then
+            return 0
+        elif [ "$target" = "on" ] && [ -n "$value" ] && [ "$value" != "0x00" ] && [ "$value" != "0" ]; then
+            return 0
+        fi
+
+        echo "Split screen not yet $target (attempt $attempt), retrying..."
+    done
+
+    echo "Warning: split screen did not reach '$target' after multiple attempts"
+    return 1
 }
 
 toggle_split_screen() {
@@ -95,13 +132,10 @@ toggle_split_screen() {
             fi
         fi
 
-        # Disable split screen after switching input
-        if [ "$OS" = "macos" ]; then
-      			sleep 1
-            betterdisplaycli set --alphanumericSerial=$MON1 --ddc --vcp=233 --value=0
-        else
-            ddcutil $DDCUTIL_FLAGS --display $MON1 setvcp E9 0x00
-        fi
+        sleep 1
+
+        # Disable split screen after switching input, retrying until confirmed
+        set_split_screen "off"
     else
         echo "Enabling split screen"
 
@@ -132,12 +166,8 @@ toggle_split_screen() {
         # This is especially true on Linux where because of the resolution change the input change takes longer
         sleep 1
 
-        # Enable split screen after setting the input
-        if [ "$OS" = "macos" ]; then
-            betterdisplaycli set --alphanumericSerial=$MON1 --ddc --vcp=233 --value=36
-        else
-            ddcutil $DDCUTIL_FLAGS --display $MON1 setvcp E9 0x24
-        fi
+        # Enable split screen after setting the input, retrying until confirmed
+        set_split_screen "on"
     fi
 }
 

@@ -36,8 +36,4 @@ if status is-interactive
 
   # Load local config
   source $HOME/.config/fish/local.fish
-
-  set -gx ANDROID_HOME /opt/android-sdk
-  set -gx ANDROID_NDK_HOME /opt/android-ndk
-  set -gx PATH $ANDROID_HOME/cmdline-tools/latest/bin $ANDROID_HOME/platform-tools $PATH
 end

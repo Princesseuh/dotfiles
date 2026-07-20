@@ -8,7 +8,7 @@ end
 fish_add_path -g $HOME/.local/bin
 
 # Fish settings
-set -U fish_greeting
+set -g fish_greeting
 
 # Colors
 set fish_color_command 5863A6

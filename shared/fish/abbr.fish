@@ -19,7 +19,6 @@ abbr    --add         ga.             git add .
 abbr    --add         gaa             git add -A
 abbr 		--add         gco             git checkout
 abbr    --add         gm              git commit -m
-abbr    --add         gca             git commit --amend
 abbr    --add         gp              git push
 abbr    --add         gd              git diff
 abbr    --add         cg              "cd (git rev-parse --show-toplevel)"

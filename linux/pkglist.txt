@@ -3,6 +3,7 @@ alsa-utils
 amd-ucode
 base
 base-devel
+bat
 cava
 cliphist
 corepack
@@ -16,6 +17,7 @@ foot-terminfo
 fzf
 gamescope
 git
+git-delta
 gnome-keyring
 gum
 heroic-games-launcher-bin
@@ -72,5 +74,6 @@ xdg-user-dirs
 xone-dkms
 xorg-xrdb
 xwayland-satellite
+yazi
 zed
 zoxide

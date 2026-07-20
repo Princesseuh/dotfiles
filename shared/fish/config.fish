@@ -4,6 +4,9 @@ if status is-login
   end
 end
 
+# Add user scripts to PATH (~/.local/bin — populated by symlink.sh)
+fish_add_path -g $HOME/.local/bin
+
 # Fish settings
 set -U fish_greeting
 

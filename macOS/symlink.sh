@@ -12,7 +12,7 @@ then
     echo "===== Symlinking dirs ====="
     echo "==========================="
 
-    dirs=("shared/bat" "shared/fish" "shared/git" "shared/htop" "shared/zed" "shared/ghostty" "macOS/linearmouse" "shared/rstask")
+    dirs=("shared/bat" "shared/fish" "shared/git" "shared/htop" "shared/zed" "shared/ghostty" "macOS/linearmouse" "shared/rstask" "macOS/skhd")
 
     for i in "${dirs[@]}"
     do
@@ -28,10 +28,26 @@ then
     echo "==========================="
 
     mkdir -p ~/.local/bin
-    for f in ~/dotfiles/macOS/scripts/*; do
+    for f in ~/dotfiles/shared/scripts/* ~/dotfiles/macOS/scripts/*; do
         script=$(basename "$f")
-        echo ~/dotfiles/macOS/scripts/$script "==>" ~/.local/bin/$script
-        ln -sf ~/dotfiles/macOS/scripts/$script ~/.local/bin/$script
+        echo "$f" "==>" ~/.local/bin/$script
+        ln -sf "$f" ~/.local/bin/$script
+    done
+
+    echo -e "\n==================================="
+    echo "===== Symlinking nested files ====="
+    echo "==================================="
+
+    nested_files=("shared/herdr/config.toml::herdr/config.toml")
+
+    for i in "${nested_files[@]}"
+    do
+        src=${i%%::*}
+        dest=${i##*::}
+        mkdir -p ~/.config/$(dirname "$dest")
+        rm -f ~/.config/$dest
+        echo ~/dotfiles/$src "==>" ~/.config/$dest
+        ln -sf ~/dotfiles/$src ~/.config/$dest
     done
 
     echo -e "\n========================================"

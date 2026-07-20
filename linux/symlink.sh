@@ -12,7 +12,7 @@ then
     echo "===== Symlinking dirs ====="
     echo "==========================="
 
-    dirs=("linux/foot" "shared/bat" "shared/fish" "shared/htop" "linux/pacman" "shared/zed" "linux/niri" "linux/DankMaterialShell" "shared/rstask")
+    dirs=("linux/foot" "shared/bat" "shared/fish" "shared/git" "shared/htop" "linux/pacman" "shared/zed" "linux/niri" "linux/DankMaterialShell" "shared/rstask")
 
     for i in "${dirs[@]}"
     do

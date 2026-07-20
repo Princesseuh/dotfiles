@@ -1,0 +1,47 @@
+[user]
+	name = Princesseuh
+	email = 3019731+Princesseuh@users.noreply.github.com
+	signingkey = ~/.ssh/id_ed25519.pub
+[gpg]
+	format = ssh
+[commit]
+	gpgsign = true
+[tag]
+	gpgsign = true
+	sort = version:refname
+[gpg "ssh"]
+	allowedSignersFile = ~/.config/git/allowed_signers
+[init]
+	defaultBranch = main
+[push]
+	autoSetupRemote = true
+[pull]
+	rebase = true
+[fetch]
+	prune = true
+[rebase]
+	autoStash = true
+	updateRefs = true
+[help]
+	autocorrect = prompt
+[diff]
+	algorithm = histogram
+	colorMoved = default
+[merge]
+	conflictstyle = zdiff3
+[rerere]
+	enabled = true
+[branch]
+	sort = -committerdate
+[column]
+	ui = auto
+[core]
+	pager = delta
+[interactive]
+	diffFilter = delta --color-only
+[delta]
+	navigate = true
+	line-numbers = true
+[alias]
+	amend = commit --amend --no-edit
+	undo = reset --soft HEAD~1

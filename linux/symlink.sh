@@ -52,6 +52,22 @@ then
         echo ~/dotfiles/$src "==>" ~/.config/$dest
         ln -sf ~/dotfiles/$src ~/.config/$dest
     done
+
+    echo -e "\n========================================"
+    echo "===== Symlinking home files ====="
+    echo "========================================"
+
+    home_files=("shared/claude/settings.json::.claude/settings.json" "shared/claude/skills::.claude/skills")
+
+    for i in "${home_files[@]}"
+    do
+        src=${i%%::*}
+        dest=${i##*::}
+        mkdir -p ~/$(dirname "$dest")
+        rm -rf ~/$dest
+        echo ~/dotfiles/$src "==>" ~/$dest
+        ln -sf ~/dotfiles/$src ~/$dest
+    done
 fi
 
 # -=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-

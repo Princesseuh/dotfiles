@@ -1,0 +1,8 @@
+{
+  "enabledPlugins": {
+    "rust-analyzer-lsp@claude-plugins-official": true
+  },
+  "tui": "fullscreen",
+  "theme": "auto",
+  "model": "claude-fable-5[1m]"
+}

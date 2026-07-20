@@ -2,6 +2,12 @@
 .env
 .DS_Store
 
+# htop atomic-write temp files
+shared/htop/htoprc.tmp.*
+
+# Zed prompt library (binary LMDB database, churns constantly)
+shared/zed/prompts/
+
 # Fish
 shared/fish/fish_variables*
 shared/fish/fishd.*

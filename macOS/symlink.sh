@@ -54,7 +54,7 @@ then
     echo "===== Symlinking home files ====="
     echo "========================================"
 
-    home_files=("shared/claude/settings.json::.claude/settings.json" "shared/claude/skills::.claude/skills")
+    home_files=("shared/claude/settings.json::.claude/settings.json" "shared/claude/CLAUDE.md::.claude/CLAUDE.md")
 
     for i in "${home_files[@]}"
     do
@@ -64,6 +64,22 @@ then
         rm -rf ~/$dest
         echo ~/dotfiles/$src "==>" ~/$dest
         ln -sf ~/dotfiles/$src ~/$dest
+    done
+
+    echo -e "\n========================================"
+    echo "===== Symlinking Claude skills ====="
+    echo "========================================"
+
+    # Link skills individually: other tools (e.g. herdr) install their own
+    # skills into ~/.claude/skills, so the directory itself must stay real.
+    [ -L ~/.claude/skills ] && rm ~/.claude/skills
+    mkdir -p ~/.claude/skills
+    for d in ~/dotfiles/shared/claude/skills/*/; do
+        [ -d "$d" ] || continue
+        skill=$(basename "$d")
+        rm -rf ~/.claude/skills/$skill
+        echo "$d" "==>" ~/.claude/skills/$skill
+        ln -sf "${d%/}" ~/.claude/skills/$skill
     done
 fi
 

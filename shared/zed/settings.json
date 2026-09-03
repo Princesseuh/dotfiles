@@ -67,7 +67,10 @@
 		"indent_size": 16,
 	},
 	"languages": {
-		"TypeScript": {
+		"Markdown": {
+   "show_edit_predictions": false
+  },
+  "TypeScript": {
 			"language_servers": [
 				"!tsgo",
 				"vtsls",

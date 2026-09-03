@@ -16,6 +16,7 @@ foot
 foot-terminfo
 fzf
 gamescope
+ghostty
 git
 git-delta
 gnome-keyring
@@ -73,6 +74,7 @@ xdg-desktop-portal-gtk
 xdg-user-dirs
 xone-dkms
 xorg-xrdb
+xremap-niri-bin
 xwayland-satellite
 yazi
 zed

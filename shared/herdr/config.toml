@@ -12,3 +12,6 @@ enabled = false
 [theme]
 name = "gruvbox"
 auto_switch = false
+
+[terminal]
+default_shell = "fish"

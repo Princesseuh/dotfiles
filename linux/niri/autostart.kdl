@@ -1,5 +1,8 @@
 spawn-sh-at-startup "wl-paste --watch cliphist store &"
 
+// Needs to run inside the niri session for NIRI_SOCKET, which app matching relies on
+spawn-sh-at-startup "xremap --device 'Kingston HyperX Pulsefire Core' --watch=config,device ~/.config/xremap/config.yml"
+
 spawn-at-startup "spotify-launcher"
 spawn-sh-at-startup "steam -silent"
 

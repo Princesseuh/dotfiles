@@ -1,0 +1,7 @@
+modmap:
+  - name: ffxiv-mouse-modifiers
+    application:
+      only: [ffxiv_dx11.exe]
+    remap:
+      BTN_SIDE: KEY_LEFTCTRL # mouse 4 (back)
+      BTN_EXTRA: KEY_LEFTSHIFT # mouse 5 (forward)

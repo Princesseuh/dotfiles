@@ -12,7 +12,7 @@ then
     echo "===== Symlinking dirs ====="
     echo "==========================="
 
-    dirs=("linux/foot" "shared/bat" "shared/fish" "shared/git" "shared/htop" "linux/pacman" "shared/zed" "linux/niri" "linux/DankMaterialShell" "shared/rstask")
+    dirs=("linux/foot" "shared/bat" "shared/fish" "linux/ghostty" "shared/git" "shared/htop" "linux/pacman" "shared/zed" "linux/niri" "linux/DankMaterialShell" "shared/rstask" "linux/pipewire" "linux/xremap")
 
     for i in "${dirs[@]}"
     do
@@ -21,6 +21,18 @@ then
         rm -rf ~/.config/$clean
         echo ~/dotfiles/$i "==>" ~/.config/$clean
         ln -sf ~/dotfiles/$i ~/.config/$clean
+    done
+
+    echo -e "\n==========================="
+    echo "===== Symlinking scripts ====="
+    echo "==========================="
+
+    mkdir -p ~/.local/bin
+    for f in ~/dotfiles/shared/scripts/* ~/dotfiles/linux/scripts/*; do
+        [ -e "$f" ] || continue
+        script=$(basename "$f")
+        echo "$f" "==>" ~/.local/bin/$script
+        ln -sf "$f" ~/.local/bin/$script
     done
 
     echo -e "\n=============================="
@@ -70,19 +82,23 @@ then
     done
 
     echo -e "\n========================================"
-    echo "===== Symlinking Claude skills ====="
+    echo "===== Symlinking Claude dirs ====="
     echo "========================================"
 
-    # Link skills individually: other tools (e.g. herdr) install their own
-    # skills into ~/.claude/skills, so the directory itself must stay real.
-    [ -L ~/.claude/skills ] && rm ~/.claude/skills
-    mkdir -p ~/.claude/skills
-    for d in ~/dotfiles/shared/claude/skills/*/; do
-        [ -d "$d" ] || continue
-        skill=$(basename "$d")
-        rm -rf ~/.claude/skills/$skill
-        echo "$d" "==>" ~/.claude/skills/$skill
-        ln -sf "${d%/}" ~/.claude/skills/$skill
+    # Other tools (e.g. herdr) install into these dirs, so link entries individually and leave the dirs real.
+    claude_dirs=("skills" "commands" "hooks")
+
+    for d in "${claude_dirs[@]}"
+    do
+        [ -L ~/.claude/$d ] && rm ~/.claude/$d
+        mkdir -p ~/.claude/$d
+        for entry in ~/dotfiles/shared/claude/$d/*; do
+            [ -e "$entry" ] || continue
+            name=$(basename "$entry")
+            rm -rf ~/.claude/$d/$name
+            echo "$entry" "==>" ~/.claude/$d/$name
+            ln -sf "$entry" ~/.claude/$d/$name
+        done
     done
 fi
 

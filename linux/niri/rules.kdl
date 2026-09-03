@@ -45,7 +45,13 @@ window-rule {
     match app-id="^steam_app_"
     match app-id="cs2"
     open-fullscreen true
-    open-on-output "DP-3"
+    open-on-output "DP-1"
+}
+
+window-rule {
+    match app-id=r#"^ffxiv_dx11\.exe$"#
+    open-fullscreen true
+    open-on-output "DP-1"
 }
 
 window-rule {

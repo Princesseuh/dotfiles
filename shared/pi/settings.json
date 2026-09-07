@@ -1,0 +1,23 @@
+{
+  "defaultProjectTrust": "always",
+  "extensions": [
+    "extensions"
+  ],
+  "skills": [
+    "skills"
+  ],
+  "prompts": [
+    "prompts"
+  ],
+  "themes": [
+    "themes"
+  ],
+  "enableSkillCommands": true,
+  "packages": [
+    "npm:pi-blackhole",
+    "npm:@ff-labs/pi-fff",
+    "npm:pi-web-access"
+  ],
+  "lastChangelogVersion": "0.85.1",
+  "theme": "dark"
+}

@@ -55,7 +55,7 @@ then
     echo "===== Symlinking home files ====="
     echo "========================================"
 
-    home_files=("shared/claude/settings.json::.claude/settings.json" "shared/claude/CLAUDE.md::.claude/CLAUDE.md")
+    home_files=("shared/claude/settings.json::.claude/settings.json" "shared/claude/CLAUDE.md::.claude/CLAUDE.md" "shared/pi/settings.json::.pi/agent/settings.json")
 
     for i in "${home_files[@]}"
     do
@@ -65,6 +65,21 @@ then
         rm -rf ~/$dest
         echo ~/dotfiles/$src "==>" ~/$dest
         ln -sf ~/dotfiles/$src ~/$dest
+    done
+
+    echo -e "\n========================================"
+    echo "======= Symlinking Pi resources ======="
+    echo "========================================"
+
+    # Keep Pi's credentials, cache, and sessions in ~/.pi/agent, while syncing
+    # only the resource directories from this repository.
+    pi_dirs=("extensions" "skills" "prompts" "themes")
+    mkdir -p ~/.pi/agent
+    for d in "${pi_dirs[@]}"
+    do
+        rm -rf ~/.pi/agent/$d
+        echo ~/dotfiles/shared/pi/$d "==>" ~/.pi/agent/$d
+        ln -sf ~/dotfiles/shared/pi/$d ~/.pi/agent/$d
     done
 
     echo -e "\n========================================"
